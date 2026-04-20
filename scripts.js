@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error);
-        msg.textContent = '✅ Thank you! Your review has been submitted.';
+        msg.textContent = '✅ Thank you! Your review has been submitted and is awaiting approval.';
         msg.className = 'form-message success';
         reviewForm.reset();
         ratingVal.value = 0;
