@@ -1004,7 +1004,7 @@ button.btn-outline:hover { background: var(--primary); color: #fff; }
 .social-link:hover { background: var(--primary); }
 
 /* ── Mobile sticky book btn ── */
-.mobile-book-btn { display: none; }
+.mobile-book-btn { display: none !important; }
 
 
 /* ── Responsive ── */
