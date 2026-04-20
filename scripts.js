@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-  document.querySelectorAll('.stat-num[data-target]').forEach(el => {
+  document.querySelectorAll('[data-target]').forEach(el => {
     const target = parseInt(el.dataset.target, 10);
     const step = target / (1600 / 16);
     let current = 0;
