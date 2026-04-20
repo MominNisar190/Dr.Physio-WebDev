@@ -101,3 +101,51 @@ html { scroll-behavior: smooth; }
 @media (max-width: 768px) {
   .hero-gallery { height: 280px; }
 }
+
+/* Professional Book Button */
+.btn-book {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #3A86FF 0%, #2EC4B6 100%);
+  color: #fff !important;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(58,134,255,0.35);
+  transition: all 0.3s cubic-bezier(.4,0,.2,1);
+  letter-spacing: 0.02em;
+  position: relative;
+  overflow: hidden;
+}
+.btn-book::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #2563eb 0%, #0891b2 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.btn-book:hover::before { opacity: 1; }
+.btn-book:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(58,134,255,0.45);
+  color: #fff !important;
+  text-decoration: none;
+}
+.btn-book:active { transform: translateY(-1px); }
+.btn-book span { position: relative; z-index: 1; }
+.btn-book-coral {
+  background: linear-gradient(135deg, #FF6B6B 0%, #ee5a24 100%);
+  box-shadow: 0 4px 20px rgba(255,107,107,0.35);
+}
+.btn-book-coral::before {
+  background: linear-gradient(135deg, #e85555 0%, #c0392b 100%);
+}
+.btn-book-coral:hover {
+  box-shadow: 0 8px 30px rgba(255,107,107,0.5);
+}
