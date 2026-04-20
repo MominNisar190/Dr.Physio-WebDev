@@ -1,166 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="corporate">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Training Videos – Dr. Zishaan Shaha Physiotherapy</title>
   <link rel="icon" type="image/png" href="DATA/Favicon1.png" />
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4/dist/full.min.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="styles.css" />
-  <style>
-    .videos-section { margin-bottom: 3rem; }
-    .videos-section h2 {
-      font-size: 1.15rem;
-      color: var(--primary);
-      margin-bottom: 1rem;
-      border-left: 4px solid var(--primary);
-      padding-left: 0.75rem;
-    }
-
-    /* Horizontal scroll row */
-    .videos-scroll-row {
-      display: flex;
-      gap: 1.25rem;
-      overflow-x: auto;
-      padding-bottom: 1rem;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: thin;
-      scrollbar-color: var(--primary) var(--primary-light);
-    }
-    .videos-scroll-row::-webkit-scrollbar { height: 5px; }
-    .videos-scroll-row::-webkit-scrollbar-track { background: var(--primary-light); border-radius: 10px; }
-    .videos-scroll-row::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
-
-    /* Video card */
-    .yt-card {
-      flex: 0 0 300px;
-      background: var(--surface);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      scroll-snap-align: start;
-      transition: transform var(--transition), box-shadow var(--transition);
-    }
-    .yt-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-
-    /* Thumbnail wrapper — click to play */
-    .yt-thumb-wrap {
-      position: relative;
-      width: 100%;
-      padding-top: 56.25%; /* 16:9 */
-      cursor: pointer;
-      background: #000;
-      overflow: hidden;
-    }
-    .yt-thumb-wrap img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 0;
-      transition: opacity 0.3s ease;
-    }
-    .yt-thumb-wrap:hover img { opacity: 0.75; }
-    .yt-play-btn {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 56px; height: 56px;
-      background: rgba(255,0,0,0.9);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      pointer-events: none;
-      transition: transform 0.2s ease, background 0.2s ease;
-    }
-    .yt-thumb-wrap:hover .yt-play-btn {
-      background: #ff0000;
-      transform: translate(-50%, -50%) scale(1.1);
-    }
-    .yt-play-btn svg { width: 22px; height: 22px; fill: #fff; margin-left: 4px; }
-
-    /* Inline iframe after click */
-    .yt-thumb-wrap iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    .yt-card-info { padding: 0.75rem 1rem; }
-    .yt-card-info h3 { font-size: 0.92rem; color: var(--text); margin-bottom: 0.35rem; line-height: 1.4; }
-    .yt-cat {
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: var(--primary);
-      background: var(--primary-light);
-      padding: 0.15rem 0.55rem;
-      border-radius: 50px;
-      display: inline-block;
-    }
-
-    .no-videos {
-      text-align: center;
-      padding: 3rem;
-      color: var(--text-muted);
-      background: var(--surface);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-    .no-videos .icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
-  </style>
 </head>
-<body>
+<body class="bg-base-200 min-h-screen">
 
-  <nav class="floating-nav" aria-label="Primary navigation">
-    <a href="index.html" class="nav-logo">🩺 Dr. Zishaan <span>Shaha</span></a>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a href="blog.html">Blog</a></li>
-      <li><a href="training-videos.html" aria-current="page">Videos</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html" class="nav-cta">📅 Book Now</a></li>
-    </ul>
-  </nav>
-
-  <main class="container videos-page">
-    <div class="section-heading reveal">
-      <h1>Training Videos</h1>
-      <p>Watch physiotherapy tutorials and exercise guides curated by Dr. Zishaan Shaha.</p>
-      <div class="section-divider"></div>
+  <div class="navbar bg-base-100 shadow-md fixed top-0 left-0 right-0 z-50 px-4">
+    <div class="navbar-start">
+      <a href="index.html" class="text-primary font-bold text-lg">🩺 Dr. Zishaan <span class="text-secondary">Shaha</span></a>
     </div>
+    <div class="navbar-center hidden lg:flex">
+      <ul class="menu menu-horizontal px-1 gap-1">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="training-videos.html" class="active">Videos</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </div>
+    <div class="navbar-end gap-2">
+      <a href="contact.html" class="btn btn-primary btn-sm">📅 Book Now</a>
+      <div class="dropdown dropdown-end lg:hidden">
+        <label tabindex="0" class="btn btn-ghost btn-sm">☰</label>
+        <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-2">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="training-videos.html">Videos</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Book Now</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
+  <main class="max-w-5xl mx-auto px-4 pt-24 pb-16">
+    <div class="text-center mb-10 reveal">
+      <h1 class="text-4xl font-extrabold mb-2">Training Videos</h1>
+      <p class="text-base-content/60">Watch physiotherapy tutorials and exercise guides curated by Dr. Zishaan Shaha.</p>
+      <div class="divider max-w-xs mx-auto"></div>
+    </div>
     <div id="videosRoot">
-      <div class="spinner"></div>
+      <div class="flex justify-center py-10"><span class="loading loading-spinner loading-lg text-primary"></span></div>
     </div>
   </main>
 
+  <footer class="footer footer-center p-0 mt-10">
+    <div class="bg-neutral text-neutral-content w-full">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto px-6 py-10 w-full text-left">
+        <div>
+          <a href="index.html" class="text-white font-bold text-lg">🩺 Dr. Zishaan <span class="text-secondary">Shaha</span></a>
+          <p class="text-neutral-content/60 text-sm mt-2">Professional home physiotherapy in Nanded.</p>
+        </div>
+        <div>
+          <p class="footer-title text-white">Quick Links</p>
+          <a href="index.html" class="link link-hover text-neutral-content/60 text-sm">Home</a>
+          <a href="services.html" class="link link-hover text-neutral-content/60 text-sm">Services</a>
+          <a href="blog.html" class="link link-hover text-neutral-content/60 text-sm">Blog</a>
+          <a href="contact.html" class="link link-hover text-neutral-content/60 text-sm">Book Appointment</a>
+        </div>
+        <div>
+          <p class="footer-title text-white">Contact</p>
+          <p class="text-neutral-content/60 text-sm">📍 Nanded 431604, Maharashtra</p>
+          <a href="tel:+919689425706" class="link link-hover text-neutral-content/60 text-sm">📞 +91 96894 25706</a>
+        </div>
+      </div>
+      <div class="border-t border-neutral-content/10 w-full py-4 text-center text-neutral-content/40 text-sm">
+        © 2026 | <a href="https://github.com/MominNisar190" target="_blank" class="link link-hover text-neutral-content/50">Designed & Developed</a> by <a href="https://www.instagram.com/nisar_momin.45/" target="_blank" class="dev-link"><span>Nisar Momin</span> 📸</a> | Nanded, Maharashtra | All rights reserved.
+        <div class="mt-1">✉️ <a href="mailto:mominnisar190@gmail.com" class="link link-hover text-neutral-content/40">mominnisar190@gmail.com</a></div>
+      </div>
+    </div>
+  </footer>
+
   <script>
     const API_BASE = 'https://dr-physio-webdev.onrender.com/api';
-
     const CATEGORIES = {
-      manual_therapy:           '🖐 Manual Therapy',
+      manual_therapy: '🖐 Manual Therapy',
       rehabilitation_exercises: '🏃 Rehabilitation Exercises',
-      pain_management:          '💊 Pain Management',
-      sports_injury:            '⚽ Sports Injury',
-      general:                  '📋 General'
+      pain_management: '💊 Pain Management',
+      sports_injury: '⚽ Sports Injury',
+      general: '📋 General'
     };
 
-    function getYtThumb(id) {
-      return `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
-    }
-
     function playVideo(wrap, youtubeId) {
-      // Replace thumbnail + play button with live iframe
-      wrap.innerHTML = `
-        <iframe
-          src="https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy">
-        </iframe>`;
+      wrap.innerHTML = `<iframe src="https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" class="w-full h-full absolute inset-0 rounded-xl"></iframe>`;
     }
 
     async function loadVideos() {
@@ -168,100 +97,46 @@
       try {
         const res = await fetch(`${API_BASE}/videos`);
         const videos = await res.json();
-
         if (!videos.length) {
-          root.innerHTML = `<div class="no-videos"><div class="icon">🎥</div><p>No videos added yet. Check back soon!</p></div>`;
+          root.innerHTML = `<div class="alert alert-info max-w-md mx-auto"><span>No videos added yet. Check back soon!</span></div>`;
           return;
         }
-
-        // Group by category
         const grouped = {};
-        videos.forEach(v => {
-          if (!grouped[v.category]) grouped[v.category] = [];
-          grouped[v.category].push(v);
-        });
-
+        videos.forEach(v => { if (!grouped[v.category]) grouped[v.category] = []; grouped[v.category].push(v); });
         root.innerHTML = '';
-
         Object.entries(grouped).forEach(([cat, vids]) => {
           const label = CATEGORIES[cat] || cat;
           const section = document.createElement('div');
-          section.className = 'videos-section reveal visible';
-
-          const row = vids.map(v => `
-            <div class="yt-card">
-              <div class="yt-thumb-wrap" id="wrap-${v._id}" onclick="playVideo(document.getElementById('wrap-${v._id}'), '${v.youtubeId}')">
-                <img src="${getYtThumb(v.youtubeId)}" alt="${v.title}" />
-                <div class="yt-play-btn">
-                  <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                </div>
-              </div>
-              <div class="yt-card-info">
-                <h3>${v.title}</h3>
-                <span class="yt-cat">${label}</span>
-              </div>
-            </div>
-          `).join('');
-
+          section.className = 'mb-10 reveal';
           section.innerHTML = `
-            <h2>${label}</h2>
-            <div class="videos-scroll-row">${row}</div>
-          `;
+            <h2 class="text-xl font-bold text-primary mb-4 border-l-4 border-primary pl-3">${label}</h2>
+            <div class="flex gap-4 overflow-x-auto pb-3 scrollbar-thin">
+              ${vids.map(v => `
+                <div class="card bg-base-100 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all flex-shrink-0 w-72">
+                  <div class="relative w-full" style="padding-top:56.25%; cursor:pointer;" id="wrap-${v._id}" onclick="playVideo(document.getElementById('wrap-${v._id}'), '${v.youtubeId}')">
+                    <img src="https://img.youtube.com/vi/${v.youtubeId}/hqdefault.jpg" alt="${v.title}" class="absolute inset-0 w-full h-full object-cover rounded-t-2xl" />
+                    <div class="absolute inset-0 flex items-center justify-center">
+                      <div class="bg-red-600 rounded-full w-14 h-14 flex items-center justify-center shadow-lg">
+                        <svg class="w-6 h-6 fill-white ml-1" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body p-3">
+                    <h3 class="font-semibold text-sm">${v.title}</h3>
+                    <span class="badge badge-primary badge-sm">${label}</span>
+                  </div>
+                </div>
+              `).join('')}
+            </div>`;
           root.appendChild(section);
+          section.classList.add('visible');
         });
-
-      } catch (err) {
-        root.innerHTML = `<div class="no-videos"><div class="icon">⚠️</div><p>Could not load videos. Make sure the server is running at <strong>localhost:3000</strong>.</p></div>`;
+      } catch {
+        root.innerHTML = `<div class="alert alert-error max-w-md mx-auto"><span>Could not load videos. Make sure the server is running.</span></div>`;
       }
     }
-
     loadVideos();
   </script>
-  <footer class="site-footer">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="nav-logo">🩺 Dr. Zishaan <span style="color:var(--secondary)">Shaha</span></a>
-        <p>Professional home physiotherapy in Nanded. Evidence-based care delivered with compassion.</p>
-        <div class="social-links">
-          <a href="#" class="social-link" aria-label="WhatsApp">💬</a>
-          <a href="#" class="social-link" aria-label="Instagram">📸</a>
-          <a href="#" class="social-link" aria-label="Facebook">👥</a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="training-videos.html">Videos</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Book Appointment</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <address>
-          📍 Nanded 431604, Maharashtra<br>
-          📞 <a href="tel:+919689425706">+91 96894 25706</a><br>
-          ✉️ <a href="mailto:zishaanshaha6@gmail.com">zishaanshaha6@gmail.com</a>
-        </address>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      © 2026 &nbsp;|&nbsp;
-      <a href="https://github.com/MominNisar190" target="_blank" rel="noopener" class="dev-link-gh">Designed & Developed</a>
-      &nbsp;by&nbsp;
-      <a href="https://www.instagram.com/nisar_momin.45/" target="_blank" rel="noopener" class="dev-link">
-        <span>Nisar Momin</span> 📸
-      </a>
-      &nbsp;|&nbsp; Nanded, Maharashtra &nbsp;|&nbsp; All rights reserved.
-      <div style="margin-top:0.4rem; font-size:0.78rem;">
-        ✉️ <a href="mailto:mominnisar190@gmail.com" style="color:rgba(255,255,255,0.45); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">mominnisar190@gmail.com</a>
-      </div>
-    </div>
-  </footer>
-
   <script src="scripts.js"></script>
 </body>
 </html>

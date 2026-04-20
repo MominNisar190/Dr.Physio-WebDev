@@ -1,218 +1,173 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="corporate">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Services – Dr. Zishaan Shaha Physiotherapy</title>
   <link rel="icon" type="image/png" href="DATA/Favicon1.png" />
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4/dist/full.min.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="styles.css" />
-  <style>
-    .service-detail-card {
-      background: var(--surface);
-      border-radius: var(--radius);
-      padding: 2rem;
-      margin-bottom: 2rem;
-      box-shadow: var(--shadow);
-      border-left: 5px solid var(--primary);
-      transition: box-shadow var(--transition);
-    }
-    .service-detail-card:hover { box-shadow: var(--shadow-lg); }
-    .service-detail-card h2 { color: var(--primary); margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.5rem; }
-    .service-detail-card .view-label {
-      font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.06em; color: var(--text-muted); margin: 1rem 0 0.25rem;
-    }
-    .service-detail-card p { color: var(--text-muted); margin-bottom: 0.75rem; line-height: 1.75; }
-    .service-detail-card .clinical { background: var(--primary-light); border-radius: 8px; padding: 0.85rem 1rem; margin-top: 0.75rem; }
-    .service-detail-card .clinical strong { color: var(--primary-dark); }
-    .service-sources { margin-top: 0.75rem; font-size: 0.82rem; color: var(--text-muted); }
-    .service-sources a { color: var(--primary); font-weight: 600; }
-    .tag-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
-    .tag { background: var(--primary-light); color: var(--primary-dark); font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.65rem; border-radius: 50px; }
-    .tag.accent { background: #e0f2fe; color: #0369a1; }
-    .tag.warn  { background: #fef3c7; color: #92400e; }
-  </style>
 </head>
-<body>
+<body class="bg-base-200 min-h-screen">
 
-  <nav class="floating-nav" aria-label="Primary navigation">
-    <a href="index.html" class="nav-logo">🩺 Dr. Zishaan <span>Shaha</span></a>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="services.html" aria-current="page">Services</a></li>
-      <li><a href="blog.html">Blog</a></li>
-      <li><a href="training-videos.html">Videos</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html" class="nav-cta">📅 Book Now</a></li>
-    </ul>
-  </nav>
-
-  <main class="container services-page">
-    <div class="section-heading reveal">
-      <h1>Our Services</h1>
-      <p>Evidence-based physiotherapy — what the science actually says, and how we apply it.</p>
-      <div class="section-divider"></div>
+  <div class="navbar bg-base-100 shadow-md fixed top-0 left-0 right-0 z-50 px-4">
+    <div class="navbar-start">
+      <a href="index.html" class="text-primary font-bold text-lg">🩺 Dr. Zishaan <span class="text-secondary">Shaha</span></a>
     </div>
-
-    <!-- 1. Manual Therapy -->
-    <div class="service-detail-card reveal">
-      <div class="tag-row"><span class="tag">🖐 Manual Therapy</span><span class="tag accent">Neurophysiological</span><span class="tag warn">Catalyst, not cure</span></div>
-      <h2>🖐 Manual Therapy</h2>
-      <p class="view-label">The Conventional View</p>
-      <p>Manual therapy — comprising joint mobilizations, spinal manipulations, and deep tissue massage — is traditionally sold as a way to "realign" joints, "break up" scar tissue, or physically release tight fascia to reduce pain and improve mobility.</p>
-      <p class="view-label">The Evidence-Based Reality</p>
-      <p>The mechanical narratives we tell patients about manual therapy are largely false. You cannot physically "break up" scar tissue with your hands; human fascia requires immense force (thousands of pounds) to deform even slightly. Furthermore, joints do not easily go "out of place," so we are not putting them back in.</p>
-      <p>Instead, manual therapy works via <strong>neurophysiological mechanisms</strong>. Touch and targeted pressure stimulate mechanoreceptors in the skin and joints. This sends a novel input to the central nervous system, which temporarily down-regulates the perception of threat (pain) and decreases localized muscle guarding. It creates a temporary window of reduced pain and increased mobility.</p>
-      <div class="clinical"><strong>🩺 Clinical Application:</strong> Manual therapy is not a cure — it is a catalyst. It should never be used as a standalone treatment because passive therapies foster patient dependency. The temporary relief gained must immediately be exploited by performing active movement and strength training in that newly acquired, pain-free range of motion.</div>
-      <p class="service-sources">📚 Source: <a href="https://academic.oup.com/painmedicine" target="_blank">Mechanisms of Manual Therapy – Pain Medicine</a></p>
+    <div class="navbar-center hidden lg:flex">
+      <ul class="menu menu-horizontal px-1 gap-1">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html" class="active">Services</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="training-videos.html">Videos</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
     </div>
-
-    <!-- 2. Rehabilitation Exercises -->
-    <div class="service-detail-card reveal">
-      <div class="tag-row"><span class="tag">🏃 Rehabilitation</span><span class="tag accent">Progressive Overload</span><span class="tag warn">Gold Standard</span></div>
-      <h2>🏃 Rehabilitation Exercises</h2>
-      <p class="view-label">The Conventional View</p>
-      <p>Rehabilitation exercises involve personalized plans utilizing resistance bands, bodyweight movements, and stretches to regain strength and function after an injury.</p>
-      <p class="view-label">The Evidence-Based Reality</p>
-      <p>While exercise is the absolute gold standard in physical therapy, the industry suffers from a massive problem: <strong>chronic under-dosing</strong>. Physiotherapists frequently prescribe exercises that are too light or lack progressive overload out of a misplaced fear of exacerbating symptoms.</p>
-      <p>To create actual tissue adaptation — whether strengthening a tendon, building muscle, or increasing bone density — the load must exceed the tissue's current capacity. True rehabilitation demands the principles of strength and conditioning: mechanical tension, metabolic stress, and progressive overload.</p>
-      <div class="clinical"><strong>🩺 Clinical Application:</strong> Rehab plans must transition from low-threshold motor control exercises (early stage) to heavy, functional loading (late stage). Pain during rehab exercises is not inherently bad — an acceptable level (3–4/10) during exercise is often necessary and safe, particularly in tendinopathy management.</div>
-      <p class="service-sources">📚 Source: <a href="https://bjsm.bmj.com" target="_blank">Progression in Rehabilitation – BJSM</a></p>
-    </div>
-
-    <!-- 3. Pain Management -->
-    <div class="service-detail-card reveal">
-      <div class="tag-row"><span class="tag">💊 Pain Management</span><span class="tag accent">Biopsychosocial</span><span class="tag warn">Brain Output</span></div>
-      <h2>💊 Pain Management</h2>
-      <p class="view-label">The Conventional View</p>
-      <p>Pain management revolves around identifying the damaged tissue (the "pain generator") and fixing it through rest, medication, or physical interventions until the pain goes away.</p>
-      <p class="view-label">The Evidence-Based Reality</p>
-      <p>The structural-biomedical model of pain is scientifically obsolete. <strong>Pain does not strictly equal tissue damage.</strong> Many people have herniated discs or torn rotator cuffs with zero pain, while others have debilitating pain with completely normal MRI scans.</p>
-      <p>Pain is a complex output generated by the brain, influenced by the <strong>Biopsychosocial Model</strong> — affected by biology (tissue state), psychology (fear-avoidance, anxiety, beliefs about pain), and sociology (work stress, home environment). Chronic pain represents a sensitized nervous system misinterpreting safe signals as dangerous ones.</p>
-      <div class="clinical"><strong>🩺 Clinical Application:</strong> Effective strategies require cognitive restructuring. Patients must be taught that "hurt does not equal harm." Treatment involves graded exposure — slowly reintroducing feared movements — alongside sleep optimization, stress management, and active movement, rather than relying on NSAIDs or passive rest.</div>
-      <p class="service-sources">📚 Source: <a href="https://www.thelancet.com" target="_blank">The Lancet Series on Low Back Pain</a></p>
-    </div>
-
-    <!-- 4. Post-Surgical Rehab -->
-    <div class="service-detail-card reveal">
-      <div class="tag-row"><span class="tag">🏥 Post-Surgical</span><span class="tag accent">Criterion-Based</span><span class="tag warn">Not Time-Based</span></div>
-      <h2>🏥 Post-Surgical Rehabilitation</h2>
-      <p class="view-label">The Conventional View</p>
-      <p>Following surgery, patients follow a strict time-based protocol (e.g., "At 4 weeks, you can jog; at 6 months, you can play sports").</p>
-      <p class="view-label">The Evidence-Based Reality</p>
-      <p>Time-based healing is an average, not an absolute. Returning a patient to activity simply because "six months have passed" is a primary reason re-injury rates are high (e.g., secondary ACL tears). Rehabilitation must be <strong>criterion-based</strong> — a patient earns the right to progress only when they pass specific objective tests (limb symmetry index, peak torque, psychological readiness).</p>
-      <div class="clinical"><strong>🩺 Clinical Application:</strong> Safe recovery requires pushing the envelope just enough to stimulate tissue remodeling without disrupting surgical fixation. It includes early mobilization to prevent arthrofibrosis and neuromuscular electrical stimulation (NMES) to prevent severe muscle atrophy in the days immediately following surgery.</div>
-      <p class="service-sources">📚 Source: <a href="https://www.jospt.org" target="_blank">Criterion-Based Rehabilitation – JOSPT</a></p>
-    </div>
-
-    <!-- 5. Sports Injury -->
-    <div class="service-detail-card reveal">
-      <div class="tag-row"><span class="tag">⚽ Sports Injury</span><span class="tag accent">PEACE & LOVE</span><span class="tag warn">RICE is Dead</span></div>
-      <h2>⚽ Sports Injury Rehabilitation</h2>
-      <p class="view-label">The Conventional View</p>
-      <p>When an athlete is injured, they should immediately apply the R.I.C.E. protocol (Rest, Ice, Compression, Elevation) to stop inflammation and heal.</p>
-      <p class="view-label">The Evidence-Based Reality</p>
-      <p>The R.I.C.E. protocol is dead — even its creator (Dr. Gabe Mirkin) has publicly retracted it. <strong>Inflammation is the first essential stage of the healing cascade.</strong> Ice suppresses the release of macrophages, thereby delaying the removal of cellular debris and actually slowing tissue repair. Absolute "Rest" leads to rapid tissue deconditioning.</p>
-      <p>The modern standard is <strong>P.E.A.C.E. & L.O.V.E.</strong> (Protect, Elevate, Avoid anti-inflammatories, Compress, Educate & Load, Optimism, Vascularization, Exercise).</p>
-      <div class="clinical"><strong>🩺 Clinical Application:</strong> Sports rehab requires optimal loading — finding the precise amount of mechanical stress the tissue can handle. It also requires bridging the gap between clinical strength and the chaotic, high-velocity demands of the actual sport through plyometrics, change-of-direction drills, and reactive agility training.</div>
-      <p class="service-sources">📚 Source: <a href="https://bjsm.bmj.com" target="_blank">Soft-tissue injuries simply need PEACE and LOVE – BJSM</a></p>
-    </div>
-
-    <!-- 6. Posture Correction -->
-    <div class="service-detail-card reveal">
-      <div class="tag-row"><span class="tag">🧘 Posture</span><span class="tag accent">Movement Variability</span><span class="tag warn">Myth Busted</span></div>
-      <h2>🧘 Posture Correction</h2>
-      <p class="view-label">The Conventional View</p>
-      <p>"Poor" posture (slouching, text neck, anterior pelvic tilt) causes mechanical strain on the body, leading to long-term musculoskeletal issues and chronic pain.</p>
-      <p class="view-label">The Evidence-Based Reality</p>
-      <p>This is one of the most pervasive myths in healthcare. Decades of high-quality research show <strong>almost zero correlation</strong> between spinal alignment or "posture" and the presence of pain. The problem is not the shape of the posture, but the <strong>duration</strong>. Holding any posture — even a perfectly upright one — for 8 hours will cause ischemia and discomfort.</p>
-      <div class="clinical"><strong>🩺 Clinical Application:</strong> Instead of rigidly "correcting" posture, we promote movement variability. The best posture is your next posture. Treatment focuses on building strength and endurance to tolerate different positions, rather than obsessing over perfect alignment.</div>
-      <p class="service-sources">📚 Source: <a href="https://www.bodyworkmovementtherapies.com" target="_blank">Fall of the Postural-Structural-Biomechanical Model – JBMT</a></p>
-    </div>
-
-    <!-- 7. Electrotherapy -->
-    <div class="service-detail-card reveal">
-      <div class="tag-row"><span class="tag">⚡ Electrotherapy</span><span class="tag accent">TENS / Ultrasound</span><span class="tag warn">Use Sparingly</span></div>
-      <h2>⚡ Electrotherapy</h2>
-      <p class="view-label">The Conventional View</p>
-      <p>Modalities like Ultrasound, TENS, and Interferential Current penetrate deep into tissues to accelerate cellular healing, reduce inflammation, and permanently eliminate pain.</p>
-      <p class="view-label">The Evidence-Based Reality</p>
-      <p>A large portion of electrotherapy is <strong>high-tech placebo</strong>. Extensive systematic reviews have found that therapeutic ultrasound is largely ineffective for almost all musculoskeletal conditions. TENS can provide acute pain relief via the Gate Control Theory of Pain, but it does not change the biological state of the tissue.</p>
-      <div class="clinical"><strong>🩺 Clinical Application:</strong> Electrotherapy should be relegated to the bottom of the clinical toolbox — useful only as a temporary pain modulator to help a highly irritable patient participate in their active exercise program. Any clinic relying heavily on passive machines is prioritizing low-effort revenue over evidence-based, active recovery.</div>
-      <p class="service-sources">📚 Source: <a href="https://www.cochranelibrary.com" target="_blank">Effectiveness of TENS and Ultrasound – Cochrane Library</a></p>
-    </div>
-
-    <!-- 8. Ergonomic Assessment -->
-    <div class="service-detail-card reveal">
-      <div class="tag-row"><span class="tag">🧍 Ergonomics</span><span class="tag accent">Workplace Health</span><span class="tag warn">Move More</span></div>
-      <h2>🧍 Ergonomic Assessment</h2>
-      <p class="view-label">The Conventional View</p>
-      <p>Optimizing the precise angles of a desk, chair, and computer monitor, and teaching workers to lift "with their knees, not their back," will prevent workplace strains and injuries.</p>
-      <p class="view-label">The Evidence-Based Reality</p>
-      <p>Strict ergonomic interventions have largely <strong>failed to reduce injury rates</strong> in industrial and corporate settings. Disc herniations are more highly correlated with genetics, poor sleep, and abrupt spikes in physical load than with the specific mechanics of a lift.</p>
-      <div class="clinical"><strong>🩺 Clinical Application:</strong> Ergonomic assessments should focus on reducing sustained, unbroken periods of work. Introducing micro-breaks, varying daily tasks, improving cardiovascular fitness, and managing workplace psychosocial stress are vastly more effective than buying a $1,000 ergonomic chair.</div>
-      <p class="service-sources">📚 Source: <a href="https://www.cochranelibrary.com" target="_blank">Workplace Ergonomic Interventions – Cochrane Review</a></p>
-    </div>
-
-    <!-- 9. Geriatric Physiotherapy -->
-    <div class="service-detail-card reveal">
-      <div class="tag-row"><span class="tag">👴 Geriatric Care</span><span class="tag accent">Heavy Lifting</span><span class="tag warn">No Ageism</span></div>
-      <h2>👴 Geriatric Physiotherapy</h2>
-      <p class="view-label">The Conventional View</p>
-      <p>Seniors are fragile. Treatment should focus on gentle stretching, low-impact seated exercises, and light balance drills to slowly improve mobility and prevent falls.</p>
-      <p class="view-label">The Evidence-Based Reality</p>
-      <p>The standard approach to geriatric physiotherapy is steeped in <strong>accidental ageism</strong>. Older adults do not lose their ability to adapt to physical stress — they simply adapt slower. Sarcopenia and osteopenia are the primary drivers of falls and loss of independence. You cannot reverse these conditions with 2-pound pink dumbbells.</p>
-      <p>Older adults safely can, and absolutely must, <strong>lift heavy weights</strong>. Heavy resistance training is the only proven way to increase bone mineral density and stimulate fast-twitch muscle fibers — the exact fibers required to catch yourself when you trip.</p>
-      <div class="clinical"><strong>🩺 Clinical Application:</strong> Geriatric care should look surprisingly like athletic performance training — heavy compound movements (sit-to-stands holding weights, deadlifts), reactive balance training, and cardiovascular conditioning to combat systemic physical decline.</div>
-      <p class="service-sources">📚 Source: <a href="https://www.nsca.com" target="_blank">Resistance Training for Older Adults – NSCA Position Stand</a></p>
-    </div>
-
-    <div style="text-align:center; margin-top:2rem;" class="reveal">
-      <a href="contact.html" class="btn" style="text-decoration:none;">📅 Book a Session</a>
-    </div>
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="nav-logo">🩺 Dr. Zishaan <span style="color:var(--secondary)">Shaha</span></a>
-        <p>Professional home physiotherapy in Nanded. Evidence-based care delivered with compassion.</p>
-        <div class="social-links">
-          <a href="#" class="social-link" aria-label="WhatsApp">💬</a>
-          <a href="#" class="social-link" aria-label="Instagram">📸</a>
-          <a href="#" class="social-link" aria-label="Facebook">👥</a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <ul>
+    <div class="navbar-end gap-2">
+      <a href="contact.html" class="btn btn-primary btn-sm">📅 Book Now</a>
+      <div class="dropdown dropdown-end lg:hidden">
+        <label tabindex="0" class="btn btn-ghost btn-sm">☰</label>
+        <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-2">
           <li><a href="index.html">Home</a></li>
           <li><a href="services.html">Services</a></li>
           <li><a href="blog.html">Blog</a></li>
           <li><a href="training-videos.html">Videos</a></li>
           <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Book Appointment</a></li>
+          <li><a href="contact.html">Book Now</a></li>
         </ul>
       </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <address>
-          📍 Nanded 431604, Maharashtra<br>
-          📞 <a href="tel:+919689425706">+91 96894 25706</a><br>
-          ✉️ <a href="mailto:zishaanshaha6@gmail.com">zishaanshaha6@gmail.com</a>
-        </address>
+    </div>
+  </div>
+
+  <main class="max-w-4xl mx-auto px-4 pt-24 pb-16">
+    <div class="text-center mb-10 reveal">
+      <h1 class="text-4xl font-extrabold mb-2">Our Services</h1>
+      <p class="text-base-content/60">Evidence-based physiotherapy — what the science actually says.</p>
+      <div class="divider max-w-xs mx-auto"></div>
+    </div>
+
+    <div class="flex flex-col gap-5">
+      <div class="card bg-base-100 shadow-md hover:shadow-xl hover:translate-x-1 transition-all reveal border-l-4 border-primary">
+        <div class="card-body flex flex-row gap-4 items-start">
+          <div class="text-4xl" style="animation: float 3s ease-in-out infinite;">🖐</div>
+          <div>
+            <h2 class="card-title text-primary">Manual Therapy</h2>
+            <p class="text-base-content/60 text-sm">Hands-on techniques including joint mobilisation, soft tissue massage, and manipulation. Works via neurophysiological mechanisms — not mechanical "realignment".</p>
+            <div class="mt-2"><span class="badge badge-primary badge-sm">Neurophysiological</span> <span class="badge badge-warning badge-sm">Catalyst, not cure</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card bg-base-100 shadow-md hover:shadow-xl hover:translate-x-1 transition-all reveal border-l-4 border-primary">
+        <div class="card-body flex flex-row gap-4 items-start">
+          <div class="text-4xl" style="animation: float 3s ease-in-out infinite;">🏃</div>
+          <div>
+            <h2 class="card-title text-primary">Rehabilitation Exercises</h2>
+            <p class="text-base-content/60 text-sm">Progressive exercise programs with proper overload. True rehab demands mechanical tension, metabolic stress, and progressive overload — not light resistance bands forever.</p>
+            <div class="mt-2"><span class="badge badge-primary badge-sm">Progressive Overload</span> <span class="badge badge-success badge-sm">Gold Standard</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card bg-base-100 shadow-md hover:shadow-xl hover:translate-x-1 transition-all reveal border-l-4 border-primary">
+        <div class="card-body flex flex-row gap-4 items-start">
+          <div class="text-4xl" style="animation: float 3s ease-in-out infinite;">💊</div>
+          <div>
+            <h2 class="card-title text-primary">Pain Management</h2>
+            <p class="text-base-content/60 text-sm">Biopsychosocial approach — pain is a brain output, not just tissue damage. Graded exposure, sleep optimization, and stress management over passive rest.</p>
+            <div class="mt-2"><span class="badge badge-primary badge-sm">Biopsychosocial</span> <span class="badge badge-warning badge-sm">Brain Output</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card bg-base-100 shadow-md hover:shadow-xl hover:translate-x-1 transition-all reveal border-l-4 border-primary">
+        <div class="card-body flex flex-row gap-4 items-start">
+          <div class="text-4xl" style="animation: float 3s ease-in-out infinite;">🏥</div>
+          <div>
+            <h2 class="card-title text-primary">Post-Surgical Rehabilitation</h2>
+            <p class="text-base-content/60 text-sm">Criterion-based recovery — not time-based. Early mobilization, NMES to prevent atrophy, and objective testing before progressing to next phase.</p>
+            <div class="mt-2"><span class="badge badge-primary badge-sm">Criterion-Based</span> <span class="badge badge-error badge-sm">Not Time-Based</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card bg-base-100 shadow-md hover:shadow-xl hover:translate-x-1 transition-all reveal border-l-4 border-primary">
+        <div class="card-body flex flex-row gap-4 items-start">
+          <div class="text-4xl" style="animation: float 3s ease-in-out infinite;">⚽</div>
+          <div>
+            <h2 class="card-title text-primary">Sports Injury Rehabilitation</h2>
+            <p class="text-base-content/60 text-sm">P.E.A.C.E. & L.O.V.E. protocol — R.I.C.E. is dead. Optimal loading, plyometrics, and reactive agility training to bridge clinical and sport demands.</p>
+            <div class="mt-2"><span class="badge badge-primary badge-sm">PEACE & LOVE</span> <span class="badge badge-error badge-sm">RICE is Dead</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card bg-base-100 shadow-md hover:shadow-xl hover:translate-x-1 transition-all reveal border-l-4 border-primary">
+        <div class="card-body flex flex-row gap-4 items-start">
+          <div class="text-4xl" style="animation: float 3s ease-in-out infinite;">🧘</div>
+          <div>
+            <h2 class="card-title text-primary">Posture Correction</h2>
+            <p class="text-base-content/60 text-sm">Movement variability over rigid alignment. The best posture is your next posture. Build strength to tolerate different positions.</p>
+            <div class="mt-2"><span class="badge badge-primary badge-sm">Movement Variability</span> <span class="badge badge-warning badge-sm">Myth Busted</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card bg-base-100 shadow-md hover:shadow-xl hover:translate-x-1 transition-all reveal border-l-4 border-primary">
+        <div class="card-body flex flex-row gap-4 items-start">
+          <div class="text-4xl" style="animation: float 3s ease-in-out infinite;">⚡</div>
+          <div>
+            <h2 class="card-title text-primary">Electrotherapy</h2>
+            <p class="text-base-content/60 text-sm">TENS and targeted modalities used as temporary pain modulators — not primary treatment. Used to help irritable patients participate in active exercise.</p>
+            <div class="mt-2"><span class="badge badge-primary badge-sm">TENS / Ultrasound</span> <span class="badge badge-warning badge-sm">Use Sparingly</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card bg-base-100 shadow-md hover:shadow-xl hover:translate-x-1 transition-all reveal border-l-4 border-primary">
+        <div class="card-body flex flex-row gap-4 items-start">
+          <div class="text-4xl" style="animation: float 3s ease-in-out infinite;">🧍</div>
+          <div>
+            <h2 class="card-title text-primary">Ergonomic Assessment</h2>
+            <p class="text-base-content/60 text-sm">Micro-breaks, movement variability, and psychosocial stress management — more effective than a $1,000 ergonomic chair.</p>
+            <div class="mt-2"><span class="badge badge-primary badge-sm">Workplace Health</span> <span class="badge badge-success badge-sm">Move More</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card bg-base-100 shadow-md hover:shadow-xl hover:translate-x-1 transition-all reveal border-l-4 border-primary">
+        <div class="card-body flex flex-row gap-4 items-start">
+          <div class="text-4xl" style="animation: float 3s ease-in-out infinite;">👴</div>
+          <div>
+            <h2 class="card-title text-primary">Geriatric Physiotherapy</h2>
+            <p class="text-base-content/60 text-sm">Heavy resistance training and reactive balance work. Older adults need to lift heavy — it's the only proven way to increase bone density and prevent falls.</p>
+            <div class="mt-2"><span class="badge badge-primary badge-sm">Heavy Lifting</span> <span class="badge badge-error badge-sm">No Ageism</span></div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      © 2026 &nbsp;|&nbsp;
-      <a href="https://github.com/MominNisar190" target="_blank" rel="noopener" class="dev-link-gh">Designed & Developed</a>
-      &nbsp;by&nbsp;
-      <a href="https://www.instagram.com/nisar_momin.45/" target="_blank" rel="noopener" class="dev-link">
-        <span>Nisar Momin</span> 📸
-      </a>
-      &nbsp;|&nbsp; Nanded, Maharashtra &nbsp;|&nbsp; All rights reserved.
-      <div style="margin-top:0.4rem; font-size:0.78rem;">
-        ✉️ <a href="mailto:mominnisar190@gmail.com" style="color:rgba(255,255,255,0.45); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">mominnisar190@gmail.com</a>
+
+    <div class="text-center mt-10 reveal">
+      <a href="contact.html" class="btn btn-primary btn-lg">📅 Book a Session</a>
+    </div>
+  </main>
+
+  <footer class="footer footer-center p-0 mt-10">
+    <div class="bg-neutral text-neutral-content w-full">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto px-6 py-10 w-full text-left">
+        <div>
+          <a href="index.html" class="text-white font-bold text-lg">🩺 Dr. Zishaan <span class="text-secondary">Shaha</span></a>
+          <p class="text-neutral-content/60 text-sm mt-2">Professional home physiotherapy in Nanded.</p>
+        </div>
+        <div>
+          <p class="footer-title text-white">Quick Links</p>
+          <a href="index.html" class="link link-hover text-neutral-content/60 text-sm">Home</a>
+          <a href="services.html" class="link link-hover text-neutral-content/60 text-sm">Services</a>
+          <a href="blog.html" class="link link-hover text-neutral-content/60 text-sm">Blog</a>
+          <a href="contact.html" class="link link-hover text-neutral-content/60 text-sm">Book Appointment</a>
+        </div>
+        <div>
+          <p class="footer-title text-white">Contact</p>
+          <p class="text-neutral-content/60 text-sm">📍 Nanded 431604, Maharashtra</p>
+          <a href="tel:+919689425706" class="link link-hover text-neutral-content/60 text-sm">📞 +91 96894 25706</a>
+        </div>
+      </div>
+      <div class="border-t border-neutral-content/10 w-full py-4 text-center text-neutral-content/40 text-sm">
+        © 2026 | <a href="https://github.com/MominNisar190" target="_blank" class="link link-hover text-neutral-content/50">Designed & Developed</a> by <a href="https://www.instagram.com/nisar_momin.45/" target="_blank" class="dev-link"><span>Nisar Momin</span> 📸</a> | Nanded, Maharashtra | All rights reserved.
+        <div class="mt-1">✉️ <a href="mailto:mominnisar190@gmail.com" class="link link-hover text-neutral-content/40">mominnisar190@gmail.com</a></div>
       </div>
     </div>
   </footer>

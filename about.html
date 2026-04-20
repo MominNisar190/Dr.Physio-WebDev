@@ -1,97 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="corporate">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About – Dr. Zishaan Shaha Physiotherapy</title>
   <link rel="icon" type="image/png" href="DATA/Favicon1.png" />
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4/dist/full.min.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+<body class="bg-base-200 min-h-screen">
 
-  <nav class="floating-nav" aria-label="Primary navigation">
-    <a href="index.html" class="nav-logo">🩺 Dr. Zishaan <span>Shaha</span></a>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a href="blog.html">Blog</a></li>
-      <li><a href="training-videos.html">Videos</a></li>
-      <li><a href="about.html" aria-current="page">About</a></li>
-      <li><a href="contact.html" class="nav-cta">📅 Book Now</a></li>
-    </ul>
-  </nav>
-
-  <main class="container about-page">
-    <div class="section-heading reveal">
-      <h1>About Me</h1>
-      <div class="section-divider"></div>
+  <div class="navbar bg-base-100 shadow-md fixed top-0 left-0 right-0 z-50 px-4">
+    <div class="navbar-start">
+      <a href="index.html" class="text-primary font-bold text-lg">🩺 Dr. Zishaan <span class="text-secondary">Shaha</span></a>
     </div>
-
-    <div class="about-card reveal">
-      <div class="about-avatar-placeholder" aria-hidden="true">👨‍⚕️</div>
-      <div class="about-text">
-        <h2 style="margin-bottom:0.5rem;">Dr. Zishaan Shaha</h2>
-        <p style="color:var(--primary); font-weight:600; margin-bottom:1rem;">Physiotherapist · Home Care Specialist</p>
-        <p>Hello! I am a physiotherapist dedicated to helping my patients recover and improve their quality of life through personalised care, evidence-based techniques, and compassionate support.</p>
-        <p>With years of experience in manual therapy, rehabilitation, and pain management, I strive to create a healing environment where you feel understood and empowered on your path to wellness.</p>
-        <p>I specialise in home-based physiotherapy, bringing professional care directly to you — so you can recover in the comfort of your own space.</p>
-        <div class="about-badges">
-          <span class="badge">Manual Therapy</span>
-          <span class="badge">Rehabilitation</span>
-          <span class="badge">Pain Management</span>
-          <span class="badge">Sports Injuries</span>
-          <span class="badge">Post-Surgical Care</span>
-          <span class="badge">Home Visits</span>
-        </div>
-        <div style="margin-top:1.5rem; display:flex; flex-wrap:wrap; gap:0.75rem;">
-          <a href="contact.html" class="btn" style="text-decoration:none;">📅 Book a Session</a>
-          <a href="admin.html" class="admin-login-btn">🔐 Admin Login</a>
-        </div>
-      </div>
+    <div class="navbar-center hidden lg:flex">
+      <ul class="menu menu-horizontal px-1 gap-1">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="training-videos.html">Videos</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+      </ul>
     </div>
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="nav-logo">🩺 Dr. Zishaan <span style="color:var(--secondary)">Shaha</span></a>
-        <p>Professional home physiotherapy in Nanded. Evidence-based care delivered with compassion.</p>
-        <div class="social-links">
-          <a href="#" class="social-link" aria-label="WhatsApp">💬</a>
-          <a href="#" class="social-link" aria-label="Instagram">📸</a>
-          <a href="#" class="social-link" aria-label="Facebook">👥</a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <ul>
+    <div class="navbar-end gap-2">
+      <a href="contact.html" class="btn btn-primary btn-sm">📅 Book Now</a>
+      <div class="dropdown dropdown-end lg:hidden">
+        <label tabindex="0" class="btn btn-ghost btn-sm">☰</label>
+        <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-2">
           <li><a href="index.html">Home</a></li>
           <li><a href="services.html">Services</a></li>
           <li><a href="blog.html">Blog</a></li>
           <li><a href="training-videos.html">Videos</a></li>
           <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Book Appointment</a></li>
+          <li><a href="contact.html">Book Now</a></li>
         </ul>
       </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <address>
-          📍 Nanded 431604, Maharashtra<br>
-          📞 <a href="tel:+919689425706">+91 96894 25706</a><br>
-          ✉️ <a href="mailto:zishaanshaha6@gmail.com">zishaanshaha6@gmail.com</a>
-        </address>
+    </div>
+  </div>
+
+  <main class="max-w-4xl mx-auto px-4 pt-24 pb-16">
+    <div class="text-center mb-10 reveal">
+      <h1 class="text-4xl font-extrabold mb-2">About Me</h1>
+      <div class="divider max-w-xs mx-auto"></div>
+    </div>
+
+    <div class="card bg-base-100 shadow-xl reveal">
+      <div class="card-body flex flex-col sm:flex-row gap-8 items-start">
+        <div class="avatar placeholder flex-shrink-0 mx-auto sm:mx-0">
+          <div class="bg-gradient-to-br from-primary to-secondary text-white rounded-full w-36 h-36 text-6xl flex items-center justify-center" style="animation: float 4s ease-in-out infinite;">👨‍⚕️</div>
+        </div>
+        <div class="flex-1 text-center sm:text-left">
+          <h2 class="text-2xl font-bold mb-1">Dr. Zishaan Shaha</h2>
+          <p class="text-primary font-semibold mb-4">Physiotherapist · Home Care Specialist</p>
+          <p class="text-base-content/60 mb-3">Hello! I am a physiotherapist dedicated to helping my patients recover and improve their quality of life through personalised care, evidence-based techniques, and compassionate support.</p>
+          <p class="text-base-content/60 mb-3">With years of experience in manual therapy, rehabilitation, and pain management, I strive to create a healing environment where you feel understood and empowered on your path to wellness.</p>
+          <p class="text-base-content/60 mb-4">I specialise in home-based physiotherapy, bringing professional care directly to you — so you can recover in the comfort of your own space.</p>
+          <div class="flex flex-wrap gap-2 justify-center sm:justify-start mb-6">
+            <span class="badge badge-primary badge-outline">Manual Therapy</span>
+            <span class="badge badge-primary badge-outline">Rehabilitation</span>
+            <span class="badge badge-primary badge-outline">Pain Management</span>
+            <span class="badge badge-primary badge-outline">Sports Injuries</span>
+            <span class="badge badge-primary badge-outline">Post-Surgical Care</span>
+            <span class="badge badge-primary badge-outline">Home Visits</span>
+          </div>
+          <div class="flex flex-wrap gap-3 justify-center sm:justify-start">
+            <a href="contact.html" class="btn btn-primary">📅 Book a Session</a>
+            <a href="admin.html" class="btn btn-neutral btn-outline">🔐 Admin Login</a>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      © 2026 &nbsp;|&nbsp;
-      <a href="https://github.com/MominNisar190" target="_blank" rel="noopener" class="dev-link-gh">Designed & Developed</a>
-      &nbsp;by&nbsp;
-      <a href="https://www.instagram.com/nisar_momin.45/" target="_blank" rel="noopener" class="dev-link">
-        <span>Nisar Momin</span> 📸
-      </a>
-      &nbsp;|&nbsp; Nanded, Maharashtra &nbsp;|&nbsp; All rights reserved.
-      <div style="margin-top:0.4rem; font-size:0.78rem;">
-        ✉️ <a href="mailto:mominnisar190@gmail.com" style="color:rgba(255,255,255,0.45); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">mominnisar190@gmail.com</a>
+  </main>
+
+  <footer class="footer footer-center p-0 mt-10">
+    <div class="bg-neutral text-neutral-content w-full">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto px-6 py-10 w-full text-left">
+        <div>
+          <a href="index.html" class="text-white font-bold text-lg">🩺 Dr. Zishaan <span class="text-secondary">Shaha</span></a>
+          <p class="text-neutral-content/60 text-sm mt-2">Professional home physiotherapy in Nanded.</p>
+        </div>
+        <div>
+          <p class="footer-title text-white">Quick Links</p>
+          <a href="index.html" class="link link-hover text-neutral-content/60 text-sm">Home</a>
+          <a href="services.html" class="link link-hover text-neutral-content/60 text-sm">Services</a>
+          <a href="blog.html" class="link link-hover text-neutral-content/60 text-sm">Blog</a>
+          <a href="contact.html" class="link link-hover text-neutral-content/60 text-sm">Book Appointment</a>
+        </div>
+        <div>
+          <p class="footer-title text-white">Contact</p>
+          <p class="text-neutral-content/60 text-sm">📍 Nanded 431604, Maharashtra</p>
+          <a href="tel:+919689425706" class="link link-hover text-neutral-content/60 text-sm">📞 +91 96894 25706</a>
+        </div>
+      </div>
+      <div class="border-t border-neutral-content/10 w-full py-4 text-center text-neutral-content/40 text-sm">
+        © 2026 | <a href="https://github.com/MominNisar190" target="_blank" class="link link-hover text-neutral-content/50">Designed & Developed</a> by <a href="https://www.instagram.com/nisar_momin.45/" target="_blank" class="dev-link"><span>Nisar Momin</span> 📸</a> | Nanded, Maharashtra | All rights reserved.
+        <div class="mt-1">✉️ <a href="mailto:mominnisar190@gmail.com" class="link link-hover text-neutral-content/40">mominnisar190@gmail.com</a></div>
       </div>
     </div>
   </footer>
