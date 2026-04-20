@@ -252,7 +252,6 @@ document.addEventListener('DOMContentLoaded', function () {
         reviewForm.reset();
         ratingVal.value = 0;
         starPicker.querySelectorAll('span').forEach(s => { s.classList.remove('active'); s.style.color = ''; });
-        loadReviews();
       } catch (err) {
         msg.textContent = '❌ ' + (err.message || 'Submission failed');
         msg.className = 'form-message error';
