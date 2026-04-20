@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Book Appointment – Dr. Zishaan Shaha Physiotherapy</title>
+  <link rel="icon" type="image/png" href="DATA/Favicon1.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <nav class="floating-nav" aria-label="Primary navigation">
+    <a href="index.html" class="nav-logo">🩺 Dr. Zishaan <span>Shaha</span></a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="training-videos.html">Videos</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" aria-current="page" class="nav-cta">📅 Book Now</a></li>
+    </ul>
+  </nav>
+
+  <main class="container contact-page">
+    <div class="section-heading reveal">
+      <h1>Contact & Book</h1>
+      <p>Reach out or book your home physiotherapy session directly.</p>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="contact-grid reveal">
+      <!-- Contact Info -->
+      <div class="contact-info-card">
+        <h2>Get in Touch</h2>
+        <div class="contact-info-item">
+          <span class="icon">👨‍⚕️</span>
+          <span>Dr. Zishaan Shaha</span>
+        </div>
+        <div class="contact-info-item">
+          <span class="icon">📍</span>
+          <span>Nanded 431604, Maharashtra</span>
+        </div>
+        <div class="contact-info-item">
+          <span class="icon">📞</span>
+          <a href="tel:+919689425706">+91 96894 25706</a>
+        </div>
+        <div class="contact-info-item">
+          <span class="icon">✉️</span>
+          <a href="mailto:zishaanshaha6@gmail.com">zishaanshaha6@gmail.com</a>
+        </div>
+        <hr style="border-color:rgba(255,255,255,0.2); margin:1.25rem 0;" />
+        <p style="font-size:0.9rem; opacity:0.85;">Available for home visits across Nanded. Appointments typically confirmed within 2 hours.</p>
+      </div>
+
+      <!-- Booking Form -->
+      <div class="booking-card">
+        <h2>📅 Book an Appointment</h2>
+        <form id="appointmentForm" aria-label="Appointment booking form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Full Name *</label>
+              <input type="text" id="name" name="name" required placeholder="Your full name" />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone *</label>
+              <input type="tel" id="phone" name="phone" required placeholder="+91 XXXXX XXXXX" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" required placeholder="you@example.com" />
+          </div>
+          <div class="form-group">
+            <label for="service">Service *</label>
+            <select id="service" name="service" required>
+              <option value="">Select a service</option>
+              <option value="Manual Therapy">Manual Therapy</option>
+              <option value="Rehabilitation Exercises">Rehabilitation Exercises</option>
+              <option value="Pain Management">Pain Management</option>
+              <option value="Sports Injury Treatment">Sports Injury Treatment</option>
+              <option value="Post-Surgical Rehabilitation">Post-Surgical Rehabilitation</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="date">Preferred Date *</label>
+              <input type="date" id="date" name="date" required />
+            </div>
+            <div class="form-group">
+              <label for="time">Preferred Time *</label>
+              <input type="time" id="time" name="time" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="message">Additional Notes</label>
+            <textarea id="message" name="message" placeholder="Describe your condition or any special requirements..."></textarea>
+          </div>
+          <button type="submit" id="submitBtn">📅 Confirm Booking</button>
+          <div id="formMessage" class="form-message" role="alert" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">🩺 Dr. Zishaan <span style="color:var(--secondary)">Shaha</span></a>
+        <p>Professional home physiotherapy in Nanded. Evidence-based care delivered with compassion.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="WhatsApp">💬</a>
+          <a href="#" class="social-link" aria-label="Instagram">📸</a>
+          <a href="#" class="social-link" aria-label="Facebook">👥</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="training-videos.html">Videos</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Book Appointment</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <address>
+          📍 Nanded 431604, Maharashtra<br>
+          📞 <a href="tel:+919689425706">+91 96894 25706</a><br>
+          ✉️ <a href="mailto:zishaanshaha6@gmail.com">zishaanshaha6@gmail.com</a>
+        </address>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 &nbsp;|&nbsp;
+      <a href="https://github.com/MominNisar190" target="_blank" rel="noopener" class="dev-link-gh">Designed & Developed</a>
+      &nbsp;by&nbsp;
+      <a href="https://www.instagram.com/nisar_momin.45/" target="_blank" rel="noopener" class="dev-link">
+        <span>Nisar Momin</span> 📸
+      </a>
+      &nbsp;|&nbsp; Nanded, Maharashtra &nbsp;|&nbsp; All rights reserved.
+      <div style="margin-top:0.4rem; font-size:0.78rem;">
+        ✉️ <a href="mailto:mominnisar190@gmail.com" style="color:rgba(255,255,255,0.45); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">mominnisar190@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="contact.html" class="mobile-book-btn">📅 Book Now</a>
+
+  <!-- Booking Confirmation Popup -->
+  <div id="bookingPopup" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:99999; display:none; align-items:center; justify-content:center; padding:1rem;">
+    <div style="background:#fff; border-radius:20px; padding:2.5rem 2rem; max-width:420px; width:100%; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,0.2); animation:fadeInUp 0.4s ease both;">
+      <div style="font-size:4rem; margin-bottom:1rem;">✅</div>
+      <h2 style="color:#16a34a; margin-bottom:0.5rem; font-size:1.6rem;">Booking Confirmed!</h2>
+      <p style="color:#6B7280; margin-bottom:0.5rem;">Your appointment request has been received.</p>
+      <p style="color:#6B7280; margin-bottom:1.75rem; font-size:0.9rem;">Dr. Zishaan Shaha will confirm your visit within <strong style="color:#333;">2 hours</strong>.</p>
+      <div style="background:#F7F9FC; border-radius:12px; padding:1rem; margin-bottom:1.75rem; font-size:0.88rem; color:#333; text-align:left;">
+        <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.4rem;">📞 <a href="tel:+919689425706" style="color:#3A86FF; font-weight:600;">+91 96894 25706</a></div>
+        <div style="display:flex; align-items:center; gap:0.5rem;">✉️ <a href="mailto:zishaanshaha6@gmail.com" style="color:#3A86FF; font-weight:600;">zishaanshaha6@gmail.com</a></div>
+      </div>
+      <button onclick="closeBookingPopup()" style="width:100%; background:#3A86FF; color:#fff; border:none; border-radius:10px; padding:0.8rem; font-size:1rem; font-weight:700; cursor:pointer;">Done</button>
+    </div>
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>

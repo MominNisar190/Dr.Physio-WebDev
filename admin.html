@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin – Dr. Zishaan Shaha Physiotherapy</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .yt-thumb {
+      width: 100px; height: 56px;
+      border-radius: 6px;
+      object-fit: cover;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="floating-nav" aria-label="Primary navigation">
+    <ul>
+      <li><a href="index.html">🏠 Home</a></li>
+      <li><a href="services.html">💆 Services</a></li>
+      <li><a href="contact.html">📅 Book</a></li>
+      <li><a href="about.html">👤 About</a></li>
+    </ul>
+  </nav>
+
+  <main class="container admin-page">
+
+    <!-- ── Login Panel ── -->
+    <div id="loginPanel">
+      <div class="admin-login-card">
+        <div style="text-align:center; font-size:2.5rem; margin-bottom:0.5rem;">🔐</div>
+        <h1>Admin Login</h1>
+        <p class="subtitle">Sign in to manage bookings & videos</p>
+        <form id="adminLoginForm" novalidate>
+          <div class="form-group">
+            <label for="adminUser">Username</label>
+            <input type="text" id="adminUser" required placeholder="admin" autocomplete="username" />
+          </div>
+          <div class="form-group">
+            <label for="adminPass">Password</label>
+            <input type="password" id="adminPass" required placeholder="••••••••" autocomplete="current-password" />
+          </div>
+          <button type="submit" style="width:100%;">Sign In</button>
+          <div id="loginMessage" class="form-message" role="alert"></div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ── Dashboard Panel ── -->
+    <div id="dashboardPanel" style="display:none;">
+
+      <!-- Header -->
+      <div class="admin-header">
+        <h1>📋 Admin Dashboard</h1>
+        <div style="display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+          <span id="adminWelcome" style="color:var(--text-muted); font-size:0.9rem;"></span>
+          <button class="btn btn-sm btn-outline" onclick="refreshBookings()">🔄 Refresh</button>
+          <button class="btn btn-sm btn-danger" onclick="adminLogout()">🚪 Logout</button>
+        </div>
+      </div>
+
+      <!-- ══ BOOKINGS SECTION ══ -->
+      <h2 style="margin-bottom:1rem; color:var(--primary);">📅 Bookings</h2>
+
+      <div class="admin-stats">
+        <div class="admin-stat-card">
+          <div class="admin-stat-num" id="statTotal">–</div>
+          <div class="admin-stat-label">Total</div>
+        </div>
+        <div class="admin-stat-card pending">
+          <div class="admin-stat-num" id="statPending">–</div>
+          <div class="admin-stat-label">Pending</div>
+        </div>
+        <div class="admin-stat-card confirmed">
+          <div class="admin-stat-num" id="statConfirmed">–</div>
+          <div class="admin-stat-label">Confirmed</div>
+        </div>
+        <div class="admin-stat-card cancelled">
+          <div class="admin-stat-num" id="statCancelled">–</div>
+          <div class="admin-stat-label">Cancelled</div>
+        </div>
+      </div>
+
+      <div class="filter-bar">
+        <input type="text" id="searchInput" placeholder="🔍 Search name, email, service..." oninput="renderTable()" />
+        <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
+        <button class="filter-btn" onclick="setFilter('pending',this)">Pending</button>
+        <button class="filter-btn" onclick="setFilter('confirmed',this)">Confirmed</button>
+        <button class="filter-btn" onclick="setFilter('cancelled',this)">Cancelled</button>
+      </div>
+
+      <div class="bookings-table-wrap" style="overflow-x:auto; margin-bottom:3rem;">
+        <div id="tableLoader" class="spinner"></div>
+        <table class="bookings-table" id="bookingsTable" style="display:none;">
+          <thead>
+            <tr>
+              <th>#</th><th>Patient</th><th>Contact</th><th>Service</th>
+              <th>Date & Time</th><th>Notes</th><th>Status</th><th>Booked On</th><th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="bookingsBody"></tbody>
+        </table>
+        <div id="emptyState" class="empty-state" style="display:none;">
+          <div class="empty-icon">📭</div><p>No bookings found.</p>
+        </div>
+      </div>
+
+      <!-- ══ VIDEO MANAGEMENT SECTION ══ -->
+      <div style="border-top:2px solid var(--primary-light); padding-top:2rem;">
+        <div class="admin-header" style="margin-bottom:1.5rem;">
+          <h2 style="color:var(--primary);">🎥 Video Management</h2>
+          <button class="btn btn-sm btn-outline" onclick="loadVideos()">🔄 Refresh</button>
+        </div>
+
+        <!-- Add Video Form -->
+        <div style="background:var(--surface); border-radius:var(--radius); padding:1.5rem; box-shadow:var(--shadow); margin-bottom:1.5rem; max-width:580px;">
+          <h3 style="color:var(--primary); margin-bottom:1rem;">➕ Add YouTube Video</h3>
+          <div class="form-group">
+            <label for="vtitle">Video Title *</label>
+            <input type="text" id="vtitle" placeholder="e.g. Knee Rehabilitation Exercises" />
+          </div>
+          <div class="form-group">
+            <label for="vcategory">Category *</label>
+            <select id="vcategory">
+              <option value="">Select category</option>
+              <option value="manual_therapy">Manual Therapy</option>
+              <option value="rehabilitation_exercises">Rehabilitation Exercises</option>
+              <option value="pain_management">Pain Management</option>
+              <option value="sports_injury">Sports Injury</option>
+              <option value="general">General</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="vurl">YouTube Link *</label>
+            <input type="url" id="vurl" placeholder="https://www.youtube.com/watch?v=..." />
+          </div>
+          <button onclick="addVideo()" style="width:auto;">🎥 Add Video</button>
+          <div id="videoMsg" class="form-message"></div>
+        </div>
+
+        <!-- Videos Table -->
+        <div class="bookings-table-wrap" style="overflow-x:auto;">
+          <div id="videoLoader" class="spinner"></div>
+          <table class="bookings-table" id="videosTable" style="display:none;">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Preview</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Added On</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="videosBody"></tbody>
+          </table>
+          <div id="videoEmpty" class="empty-state" style="display:none;">
+            <div class="empty-icon">🎥</div><p>No videos added yet.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ REVIEW MANAGEMENT SECTION ══ -->
+      <div style="border-top:2px solid var(--primary-light); padding-top:2rem; margin-top:2rem;">
+        <div class="admin-header" style="margin-bottom:1.5rem;">
+          <h2 style="color:var(--primary);">⭐ Review Management</h2>
+          <button class="btn btn-sm btn-outline" onclick="loadReviewsAdmin()">🔄 Refresh</button>
+        </div>
+        <div class="bookings-table-wrap" style="overflow-x:auto;">
+          <div id="reviewLoader" class="spinner"></div>
+          <table class="bookings-table" id="reviewsTable" style="display:none;">
+            <thead>
+              <tr><th>#</th><th>Name</th><th>Rating</th><th>Review</th><th>Date</th><th>Status</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="reviewsBody"></tbody>
+          </table>
+          <div id="reviewEmpty" class="empty-state" style="display:none;">
+            <div class="empty-icon">⭐</div><p>No reviews yet.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    const API = 'http://localhost:3000/api';
+    let allBookings = [];
+    let currentFilter = 'all';
+
+    const CAT_LABELS = {
+      manual_therapy: 'Manual Therapy',
+      rehabilitation_exercises: 'Rehabilitation Exercises',
+      pain_management: 'Pain Management',
+      sports_injury: 'Sports Injury',
+      general: 'General'
+    };
+
+    // ── Auth ──────────────────────────────────────────────────────────────────
+    function getToken() { return localStorage.getItem('adminToken'); }
+
+    function checkAuth() {
+      const token = getToken();
+      if (token) {
+        try {
+          const payload = JSON.parse(atob(token.split('.')[1]));
+          if (payload.exp * 1000 > Date.now()) { showDashboard(payload.username); return; }
+        } catch {}
+        localStorage.removeItem('adminToken');
+      }
+      showLogin();
+    }
+
+    function showLogin() {
+      document.getElementById('loginPanel').style.display = 'block';
+      document.getElementById('dashboardPanel').style.display = 'none';
+    }
+
+    function showDashboard(username) {
+      document.getElementById('loginPanel').style.display = 'none';
+      document.getElementById('dashboardPanel').style.display = 'block';
+      document.getElementById('adminWelcome').textContent = `Welcome, ${username}`;
+      refreshBookings();
+      loadVideos();
+      loadReviewsAdmin();
+    }
+
+    function adminLogout() {
+      localStorage.removeItem('adminToken');
+      showLogin();
+      showToast('Logged out', 'success');
+    }
+
+    // ── Login ─────────────────────────────────────────────────────────────────
+    document.getElementById('adminLoginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      const msg = document.getElementById('loginMessage');
+      btn.textContent = 'Signing in…'; btn.disabled = true;
+      try {
+        const res = await fetch(`${API}/admin/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: document.getElementById('adminUser').value.trim(),
+            password: document.getElementById('adminPass').value
+          })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Login failed');
+        localStorage.setItem('adminToken', data.token);
+        const payload = JSON.parse(atob(data.token.split('.')[1]));
+        showDashboard(payload.username);
+        showToast('Login successful', 'success');
+      } catch (err) {
+        msg.textContent = err.message; msg.className = 'form-message error';
+      } finally {
+        btn.textContent = 'Sign In'; btn.disabled = false;
+      }
+    });
+
+    // ── Bookings ──────────────────────────────────────────────────────────────
+    async function refreshBookings() {
+      document.getElementById('tableLoader').style.display = 'block';
+      document.getElementById('bookingsTable').style.display = 'none';
+      document.getElementById('emptyState').style.display = 'none';
+      try {
+        const res = await fetch(`${API}/admin/bookings`, { headers: { 'Authorization': `Bearer ${getToken()}` } });
+        if (res.status === 401) { adminLogout(); return; }
+        allBookings = await res.json();
+        updateStats(); renderTable();
+      } catch { showToast('Failed to load bookings', 'error'); }
+      finally { document.getElementById('tableLoader').style.display = 'none'; }
+    }
+
+    function updateStats() {
+      document.getElementById('statTotal').textContent     = allBookings.length;
+      document.getElementById('statPending').textContent   = allBookings.filter(b => b.status === 'pending').length;
+      document.getElementById('statConfirmed').textContent = allBookings.filter(b => b.status === 'confirmed').length;
+      document.getElementById('statCancelled').textContent = allBookings.filter(b => b.status === 'cancelled').length;
+    }
+
+    function setFilter(filter, btn) {
+      currentFilter = filter;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderTable();
+    }
+
+    function renderTable() {
+      const search = document.getElementById('searchInput').value.toLowerCase();
+      let data = allBookings;
+      if (currentFilter !== 'all') data = data.filter(b => b.status === currentFilter);
+      if (search) data = data.filter(b =>
+        b.name.toLowerCase().includes(search) ||
+        b.email.toLowerCase().includes(search) ||
+        b.service.toLowerCase().includes(search) ||
+        b.phone.includes(search)
+      );
+      const tbody = document.getElementById('bookingsBody');
+      const table = document.getElementById('bookingsTable');
+      const empty = document.getElementById('emptyState');
+      if (!data.length) { table.style.display = 'none'; empty.style.display = 'block'; return; }
+      table.style.display = 'table'; empty.style.display = 'none';
+      tbody.innerHTML = data.map((b, i) => `
+        <tr>
+          <td style="color:var(--text-muted);font-size:0.8rem;">${i+1}</td>
+          <td><strong>${esc(b.name)}</strong></td>
+          <td><div style="font-size:0.82rem;">📞 ${esc(b.phone)}</div><div style="font-size:0.82rem;color:var(--text-muted);">✉️ ${esc(b.email)}</div></td>
+          <td>${esc(b.service)}</td>
+          <td><div>📅 ${esc(b.date)}</div><div style="color:var(--text-muted);font-size:0.82rem;">🕐 ${esc(b.time)}</div></td>
+          <td style="max-width:140px;font-size:0.82rem;color:var(--text-muted);">${esc(b.message||'—')}</td>
+          <td><span class="status-badge ${b.status}">${b.status}</span></td>
+          <td style="font-size:0.78rem;color:var(--text-muted);">${new Date(b.createdAt).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})}</td>
+          <td>
+            <div class="action-btns">
+              ${b.status!=='confirmed'?`<button class="btn btn-success btn-sm" onclick="updateStatus('${b._id}','confirmed')">✓</button>`:''}
+              ${b.status!=='cancelled'?`<button class="btn btn-warning btn-sm" onclick="updateStatus('${b._id}','cancelled')">✕</button>`:''}
+              <button class="btn btn-danger btn-sm" onclick="deleteBooking('${b._id}')">🗑</button>
+            </div>
+          </td>
+        </tr>`).join('');
+    }
+
+    async function updateStatus(id, status) {
+      try {
+        const res = await fetch(`${API}/admin/bookings/${id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${getToken()}` },
+          body: JSON.stringify({ status })
+        });
+        if (!res.ok) throw new Error();
+        const idx = allBookings.findIndex(b => b._id === id);
+        if (idx !== -1) allBookings[idx].status = status;
+        updateStats(); renderTable();
+        showToast(`Booking ${status}`, 'success');
+      } catch { showToast('Update failed', 'error'); }
+    }
+
+    async function deleteBooking(id) {
+      if (!confirm('Delete this booking permanently?')) return;
+      try {
+        await fetch(`${API}/admin/bookings/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${getToken()}` } });
+        allBookings = allBookings.filter(b => b._id !== id);
+        updateStats(); renderTable();
+        showToast('Booking deleted', 'success');
+      } catch { showToast('Delete failed', 'error'); }
+    }
+
+    // ── Videos ────────────────────────────────────────────────────────────────
+    async function loadVideos() {
+      document.getElementById('videoLoader').style.display = 'block';
+      document.getElementById('videosTable').style.display = 'none';
+      document.getElementById('videoEmpty').style.display = 'none';
+      try {
+        const res = await fetch(`${API}/videos`);
+        const videos = await res.json();
+        const tbody = document.getElementById('videosBody');
+        const table = document.getElementById('videosTable');
+        const empty = document.getElementById('videoEmpty');
+        if (!videos.length) { empty.style.display = 'block'; return; }
+        table.style.display = 'table';
+        tbody.innerHTML = videos.map((v, i) => `
+          <tr>
+            <td style="color:var(--text-muted);font-size:0.8rem;">${i+1}</td>
+            <td><img class="yt-thumb" src="https://img.youtube.com/vi/${v.youtubeId}/mqdefault.jpg" alt="${esc(v.title)}" /></td>
+            <td><strong>${esc(v.title)}</strong></td>
+            <td><span class="status-badge confirmed">${CAT_LABELS[v.category]||v.category}</span></td>
+            <td style="font-size:0.78rem;color:var(--text-muted);">${new Date(v.createdAt).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})}</td>
+            <td><button class="btn btn-danger btn-sm" onclick="deleteVideo('${v._id}')">🗑 Delete</button></td>
+          </tr>`).join('');
+      } catch { showToast('Failed to load videos', 'error'); }
+      finally { document.getElementById('videoLoader').style.display = 'none'; }
+    }
+
+    async function addVideo() {
+      const title = document.getElementById('vtitle').value.trim();
+      const category = document.getElementById('vcategory').value;
+      const youtubeUrl = document.getElementById('vurl').value.trim();
+      const msg = document.getElementById('videoMsg');
+      if (!title || !category || !youtubeUrl) {
+        msg.textContent = 'Please fill all fields.'; msg.className = 'form-message error'; return;
+      }
+      try {
+        const res = await fetch(`${API}/admin/videos`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${getToken()}` },
+          body: JSON.stringify({ title, category, youtubeUrl })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Failed');
+        msg.textContent = '✅ Video added successfully!'; msg.className = 'form-message success';
+        document.getElementById('vtitle').value = '';
+        document.getElementById('vcategory').value = '';
+        document.getElementById('vurl').value = '';
+        loadVideos();
+        showToast('Video added', 'success');
+      } catch (err) {
+        msg.textContent = '❌ ' + err.message; msg.className = 'form-message error';
+      }
+    }
+
+    async function deleteVideo(id) {
+      if (!confirm('Delete this video?')) return;
+      try {
+        await fetch(`${API}/admin/videos/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${getToken()}` } });
+        loadVideos();
+        showToast('Video deleted', 'success');
+      } catch { showToast('Delete failed', 'error'); }
+    }
+
+    // ── Reviews Admin ─────────────────────────────────────────────────────────
+    async function loadReviewsAdmin() {
+      document.getElementById('reviewLoader').style.display = 'block';
+      document.getElementById('reviewsTable').style.display = 'none';
+      document.getElementById('reviewEmpty').style.display = 'none';
+      try {
+        const res = await fetch(`${API}/admin/reviews`, { headers: { 'Authorization': `Bearer ${getToken()}` } });
+        const reviews = await res.json();
+        const tbody = document.getElementById('reviewsBody');
+        const table = document.getElementById('reviewsTable');
+        const empty = document.getElementById('reviewEmpty');
+        if (!reviews.length) { empty.style.display = 'block'; return; }
+        table.style.display = 'table';
+        tbody.innerHTML = reviews.map((r, i) => `
+          <tr>
+            <td style="color:var(--text-muted);font-size:0.8rem;">${i+1}</td>
+            <td><strong>${esc(r.name)}</strong></td>
+            <td style="color:#f59e0b; font-size:1rem;">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</td>
+            <td style="max-width:200px; font-size:0.82rem; color:var(--text-muted);">${esc(r.review)}</td>
+            <td style="font-size:0.78rem;color:var(--text-muted);">${new Date(r.createdAt).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})}</td>
+            <td><span class="status-badge ${r.approved ? 'confirmed' : 'pending'}">${r.approved ? 'Approved' : 'Pending'}</span></td>
+            <td>
+              <div class="action-btns">
+                ${!r.approved ? `<button class="btn btn-success btn-sm" onclick="approveReview('${r._id}', true)">✓ Approve</button>` : `<button class="btn btn-warning btn-sm" onclick="approveReview('${r._id}', false)">↩ Unapprove</button>`}
+                <button class="btn btn-danger btn-sm" onclick="deleteReview('${r._id}')">🗑</button>
+              </div>
+            </td>
+          </tr>`).join('');
+      } catch { showToast('Failed to load reviews', 'error'); }
+      finally { document.getElementById('reviewLoader').style.display = 'none'; }
+    }
+
+    async function approveReview(id, approved) {
+      try {
+        await fetch(`${API}/admin/reviews/${id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${getToken()}` },
+          body: JSON.stringify({ approved })
+        });
+        loadReviewsAdmin();
+        showToast(approved ? 'Review approved' : 'Review unapproved', 'success');
+      } catch { showToast('Update failed', 'error'); }
+    }
+
+    async function deleteReview(id) {
+      if (!confirm('Delete this review?')) return;
+      try {
+        await fetch(`${API}/admin/reviews/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${getToken()}` } });
+        loadReviewsAdmin();
+        showToast('Review deleted', 'success');
+      } catch { showToast('Delete failed', 'error'); }
+    }
+
+    // ── Helpers ───────────────────────────────────────────────────────────────
+    function esc(str) {
+      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function showToast(msg, type = 'success') {
+      const t = document.createElement('div');
+      t.className = `toast ${type}`;
+      t.textContent = msg;
+      document.body.appendChild(t);
+      setTimeout(() => t.remove(), 3000);
+    }
+
+    checkAuth();
+  </script>
+</body>
+</html>
