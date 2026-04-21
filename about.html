@@ -11,32 +11,21 @@
 </head>
 <body class="bg-base-200 min-h-screen">
 
-  <div class="navbar bg-base-100 shadow-md fixed top-0 left-0 right-0 z-50 px-4">
-    <div class="navbar-start">
-      <a href="index.html" class="text-primary font-bold text-lg">🩺 Dr. Zishaan <span class="text-secondary">Shaha</span></a>
+  <div class="navbar bg-base-100 shadow-md fixed top-0 left-0 right-0 z-50 px-3 nav-mobile">
+    <div class="navbar-start flex-shrink-0">
+      <a href="index.html" class="text-primary font-bold text-base">🩺 Dr. Zishaan <span class="text-secondary">Shaha</span></a>
     </div>
-    <div class="navbar-center hidden lg:flex">
-      <ul class="menu menu-horizontal px-1 gap-1">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="training-videos.html">Videos</a></li>
-        <li><a href="about.html" class="active">About</a></li>
+    <div class="navbar-center flex overflow-x-auto nav-links-scroll">
+      <ul class="menu menu-horizontal px-1 gap-0 flex-nowrap">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="training-videos.html" class="nav-link">Videos</a></li>
+        <li><a href="about.html" class="nav-link active">About</a></li>
       </ul>
     </div>
-    <div class="navbar-end gap-2">
-      <a href="contact.html" class="btn btn-primary btn-sm">📅 Book Now</a>
-      <div class="dropdown dropdown-end lg:hidden">
-        <label tabindex="0" class="btn btn-ghost btn-sm">☰</label>
-        <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-2">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="training-videos.html">Videos</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Book Now</a></li>
-        </ul>
-      </div>
+    <div class="navbar-end flex-shrink-0">
+      <a href="contact.html" class="btn btn-primary btn-sm">📅 Book</a>
     </div>
   </div>
 

@@ -102,6 +102,51 @@ html { scroll-behavior: smooth; }
   .hero-gallery { height: 280px; }
 }
 
+/* Navbar always-visible links */
+.nav-links-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.nav-links-scroll::-webkit-scrollbar { display: none; }
+
+.nav-link {
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  padding: 0.4rem 0.55rem !important;
+  border-radius: 8px !important;
+  white-space: nowrap !important;
+  transition: all 0.2s ease !important;
+}
+.nav-link:hover {
+  background: rgba(58,134,255,0.08) !important;
+  color: #3A86FF !important;
+}
+.nav-link.active {
+  color: #3A86FF !important;
+  background: rgba(58,134,255,0.1) !important;
+  font-weight: 700 !important;
+}
+
+@media (max-width: 768px) {
+  .nav-mobile {
+    min-height: 52px !important;
+    padding: 0 0.5rem !important;
+  }
+  .navbar-start a {
+    font-size: 0.85rem !important;
+    white-space: nowrap !important;
+  }
+  .nav-link {
+    font-size: 0.78rem !important;
+    padding: 0.35rem 0.45rem !important;
+  }
+  .navbar-end .btn-sm {
+    font-size: 0.72rem !important;
+    padding: 0.35rem 0.65rem !important;
+    white-space: nowrap !important;
+  }
+}
+
 /* =============================================
    GLOBAL BUTTON SYSTEM
    ============================================= */
@@ -342,41 +387,6 @@ html { scroll-behavior: smooth; }
    MOBILE RESPONSIVE OVERHAUL (max-width: 768px)
    ============================================= */
 @media (max-width: 768px) {
-
-  /* --- NAVBAR --- */
-  .navbar {
-    padding: 0 0.75rem !important;
-    min-height: 56px !important;
-  }
-  .navbar-start a {
-    font-size: 0.95rem !important;
-  }
-  /* Hide "Book Now" button in navbar on mobile to save space */
-  .navbar-end > a.btn {
-    display: none !important;
-  }
-  /* Make hamburger more tappable */
-  .btn-ghost.btn-sm {
-    width: 40px !important;
-    height: 40px !important;
-    font-size: 1.2rem !important;
-    padding: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-  }
-  /* Dropdown menu full-width feel */
-  .dropdown-content.menu {
-    width: calc(100vw - 2rem) !important;
-    max-width: 320px !important;
-    font-size: 1rem !important;
-    padding: 0.5rem !important;
-  }
-  .dropdown-content.menu li a {
-    padding: 0.75rem 1rem !important;
-    border-radius: 10px !important;
-    font-weight: 600 !important;
-  }
 
   /* --- HERO SECTION --- */
   .hero {
