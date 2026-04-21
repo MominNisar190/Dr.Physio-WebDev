@@ -60,14 +60,80 @@ document.addEventListener('DOMContentLoaded', function () {
     const dateInput = document.getElementById('date');
     if (dateInput) dateInput.min = new Date().toISOString().split('T')[0];
 
+    // Phone number formatting
+    const phoneInput = document.getElementById('phone');
+    if (phoneInput) {
+      phoneInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+        if (value.length > 0 && !value.startsWith('91') && value.length <= 10) {
+          // Auto-add country code for Indian numbers
+          if (value.length === 10) {
+            value = '91' + value;
+          }
+        }
+        // Format: +91 XXXXX XXXXX
+        if (value.length > 2) {
+          e.target.value = '+' + value.substring(0, 2) + ' ' + value.substring(2, 7) + (value.length > 7 ? ' ' + value.substring(7, 12) : '');
+        } else if (value.length > 0) {
+          e.target.value = '+' + value;
+        }
+      });
+    }
+
     appointmentForm.addEventListener('submit', async function (e) {
       e.preventDefault();
       const msg = document.getElementById('formMessage');
       const btn = document.getElementById('submitBtn');
 
+      // Enhanced validation
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const service = document.getElementById('service').value;
+      const date = document.getElementById('date').value;
+      const time = document.getElementById('time').value;
+
+      if (!name || name.length < 2) {
+        msg.textContent = 'Please enter a valid name (at least 2 characters).';
+        msg.className = 'form-message error';
+        msg.style.display = 'block';
+        return;
+      }
+
+      const phoneRegex = /^[+]?[0-9]{10,15}$/;
+      if (!phoneRegex.test(phone.replace(/[\s\-\(\)]/g, ''))) {
+        msg.textContent = 'Please enter a valid phone number (10-15 digits).';
+        msg.className = 'form-message error';
+        msg.style.display = 'block';
+        return;
+      }
+
+      const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
+      if (!emailRegex.test(email)) {
+        msg.textContent = 'Please enter a valid email address.';
+        msg.className = 'form-message error';
+        msg.style.display = 'block';
+        return;
+      }
+
+      if (!service) {
+        msg.textContent = 'Please select a service.';
+        msg.className = 'form-message error';
+        msg.style.display = 'block';
+        return;
+      }
+
+      if (!date || !time) {
+        msg.textContent = 'Please select both date and time.';
+        msg.className = 'form-message error';
+        msg.style.display = 'block';
+        return;
+      }
+
       if (!appointmentForm.checkValidity()) {
         msg.textContent = 'Please fill out all required fields correctly.';
         msg.className = 'form-message error';
+        msg.style.display = 'block';
         return;
       }
 
@@ -77,12 +143,12 @@ document.addEventListener('DOMContentLoaded', function () {
       msg.style.display = 'none';
 
       const payload = {
-        name:    document.getElementById('name').value.trim(),
-        email:   document.getElementById('email').value.trim(),
-        phone:   document.getElementById('phone').value.trim(),
-        service: document.getElementById('service').value,
-        date:    document.getElementById('date').value,
-        time:    document.getElementById('time').value,
+        name:    name,
+        email:   email,
+        phone:   phone,
+        service: service,
+        date:    date,
+        time:    time,
         message: document.getElementById('message')?.value.trim() || ''
       };
 
@@ -96,11 +162,13 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!res.ok) throw new Error(data.error || 'Submission failed');
         msg.textContent = '✅ Appointment booked successfully!';
         msg.className = 'form-message success';
+        msg.style.display = 'block';
         appointmentForm.reset();
         showBookingPopup();
       } catch (err) {
         msg.textContent = '❌ ' + err.message;
         msg.className = 'form-message error';
+        msg.style.display = 'block';
       } finally {
         btn.textContent = '📅 Confirm Booking';
         btn.disabled = false;

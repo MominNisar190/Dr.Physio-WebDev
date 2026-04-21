@@ -27,6 +27,83 @@
       .stats-grid .stat:nth-child(3), .stats-grid .stat:nth-child(4) { border-bottom: none; }
     }
     .admin-table-wrap { overflow-x: auto; }
+    
+    /* WhatsApp button styling */
+    .whatsapp-btn {
+      background: linear-gradient(135deg, #25D366 0%, #20BA5A 100%);
+      color: white;
+      border: none;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(37, 211, 102, 0.25);
+      position: relative;
+      overflow: hidden;
+      height: 1.75rem;
+      line-height: 1;
+    }
+    .whatsapp-btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+    .whatsapp-btn:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+    .whatsapp-btn:hover {
+      background: linear-gradient(135deg, #128C7E 0%, #0D7A6A 100%);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+      transform: translateY(-2px);
+    }
+    .whatsapp-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba(37, 211, 102, 0.4);
+    }
+    .whatsapp-btn:disabled {
+      background: linear-gradient(135deg, #ccc 0%, #aaa 100%);
+      cursor: not-allowed;
+      box-shadow: none;
+      opacity: 0.6;
+    }
+    .whatsapp-btn:disabled:hover {
+      transform: none;
+    }
+    .whatsapp-icon {
+      font-size: 1rem;
+      position: relative;
+      z-index: 1;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    .whatsapp-btn:hover .whatsapp-icon {
+      animation: shake 0.5s;
+    }
+    @keyframes shake {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-10deg); }
+      75% { transform: rotate(10deg); }
+    }
+    .whatsapp-btn span {
+      position: relative;
+      z-index: 1;
+    }
   </style>
 </head>
 <body class="bg-base-200 min-h-screen">
@@ -351,6 +428,7 @@
             <div class="flex gap-1 flex-wrap">
               ${b.status!=='confirmed'?`<button class="btn btn-success btn-xs" onclick="updateStatus('${b._id}','confirmed')">✓</button>`:''}
               ${b.status!=='cancelled'?`<button class="btn btn-warning btn-xs" onclick="updateStatus('${b._id}','cancelled')">✕</button>`:''}
+              ${b.status==='confirmed'?`<button class="whatsapp-btn" onclick="openWhatsAppById('${b._id}')" title="Send WhatsApp Confirmation" ${!b.phone?'disabled':''}><span class="whatsapp-icon">💬</span><span>WhatsApp</span></button>`:''}
               <button class="btn btn-error btn-xs" onclick="deleteBooking('${b._id}')">🗑</button>
             </div>
           </td>
@@ -376,6 +454,7 @@
             <div class="actions">
               ${b.status!=='confirmed'?`<button class="btn btn-success btn-xs" onclick="updateStatus('${b._id}','confirmed')">✓ Confirm</button>`:''}
               ${b.status!=='cancelled'?`<button class="btn btn-warning btn-xs" onclick="updateStatus('${b._id}','cancelled')">✕ Cancel</button>`:''}
+              ${b.status==='confirmed'?`<button class="whatsapp-btn" onclick="openWhatsAppById('${b._id}')" title="Send WhatsApp Confirmation" ${!b.phone?'disabled':''}><span class="whatsapp-icon">💬</span><span>WhatsApp</span></button>`:''}
               <button class="btn btn-error btn-xs" onclick="deleteBooking('${b._id}')">🗑 Delete</button>
             </div>
           </div>`).join('');
@@ -530,6 +609,43 @@
 
     function esc(str) {
       return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    // WhatsApp functionality
+    function formatPhoneForWhatsApp(phone) {
+      // Remove all spaces, special characters, and "+"
+      return phone.replace(/[\s\+\-\(\)]/g, '');
+    }
+
+    function generateWhatsAppURL(booking) {
+      const phone = formatPhoneForWhatsApp(booking.phone);
+      const message = `Hello ${booking.name}, your booking for ${booking.service} on ${booking.date} at ${booking.time} is confirmed. Thank you!`;
+      const encodedMessage = encodeURIComponent(message);
+      return `https://wa.me/${phone}?text=${encodedMessage}`;
+    }
+
+    function openWhatsApp(booking) {
+      if (!booking || !booking.phone) {
+        showToast('Phone number is missing', 'error');
+        return;
+      }
+      try {
+        const url = generateWhatsAppURL(booking);
+        window.open(url, '_blank', 'noopener,noreferrer');
+        showToast('Opening WhatsApp...', 'success');
+      } catch (error) {
+        console.error('WhatsApp error:', error);
+        showToast('Failed to open WhatsApp', 'error');
+      }
+    }
+
+    function openWhatsAppById(bookingId) {
+      const booking = allBookings.find(b => b._id === bookingId);
+      if (booking) {
+        openWhatsApp(booking);
+      } else {
+        showToast('Booking not found', 'error');
+      }
     }
 
     function showToast(msg, type = 'success') {
