@@ -8,20 +8,51 @@
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4/dist/full.min.css" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="animations.css" />
+  <style>
+    /* Admin mobile overrides */
+    @media (max-width: 768px) {
+      .admin-header-row { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+      .admin-header-row h1 { font-size: 1.5rem; }
+      .admin-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+      .admin-card-list { display: flex; flex-direction: column; gap: 0.75rem; }
+      .admin-card-item { background: #fff; border-radius: 12px; padding: 1rem; box-shadow: 0 2px 12px rgba(0,0,0,0.07); border: 1px solid #e5e7eb; }
+      .admin-card-item .label { font-size: 0.7rem; color: #9ca3af; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+      .admin-card-item .value { font-size: 0.9rem; color: #111827; font-weight: 500; }
+      .admin-card-item .actions { display: flex; gap: 0.4rem; margin-top: 0.75rem; flex-wrap: wrap; }
+      .filter-row { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+      .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+      .stats-grid .stat { padding: 0.75rem 0.5rem; border-right: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; }
+      .stats-grid .stat:nth-child(2n) { border-right: none; }
+      .stats-grid .stat:nth-child(3), .stats-grid .stat:nth-child(4) { border-bottom: none; }
+    }
+    .admin-table-wrap { overflow-x: auto; }
+  </style>
 </head>
 <body class="bg-base-200 min-h-screen">
 
-  <div class="navbar bg-base-100 shadow-md fixed top-0 left-0 right-0 z-50 px-4">
-    <div class="navbar-start">
-      <a href="index.html" class="text-primary font-bold text-lg">🩺 Dr. Zishaan <span class="text-secondary">Shaha</span></a>
-    </div>
-    <div class="navbar-end gap-2">
-      <a href="index.html" class="btn btn-ghost btn-sm">🏠 Home</a>
-      <a href="services.html" class="btn btn-ghost btn-sm">Services</a>
+  <header class="site-header fixed top-0 left-0 right-0 z-50 bg-base-100 shadow-md">
+    <div class="flex items-center justify-between px-4 h-14">
+      <a href="index.html" class="text-primary font-bold text-base">🩺 Dr. Zishaan <span class="text-secondary">Shaha</span></a>
+      <ul class="hidden lg:flex menu menu-horizontal px-1 gap-0">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="training-videos.html" class="nav-link">Videos</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+      </ul>
       <a href="contact.html" class="btn btn-primary btn-sm">📅 Book Now</a>
-      <a href="about.html" class="btn btn-ghost btn-sm">About</a>
     </div>
-  </div>
+    <div class="lg:hidden border-t border-base-200">
+      <ul class="flex items-center justify-around px-1 py-1">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="training-videos.html" class="nav-link">Videos</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+      </ul>
+    </div>
+  </header>
 
   <main class="max-w-6xl mx-auto px-4 pt-24 pb-16">
 
@@ -52,9 +83,9 @@
     <div id="dashboardPanel" style="display:none;">
 
       <!-- Header -->
-      <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
-        <h1 class="text-3xl font-extrabold">📋 Admin Dashboard</h1>
-        <div class="flex gap-2 flex-wrap items-center">
+      <div class="admin-header-row flex flex-wrap items-center justify-between gap-3 mb-6">
+        <h1 class="text-2xl lg:text-3xl font-extrabold">📋 Admin Dashboard</h1>
+        <div class="admin-actions flex gap-2 flex-wrap items-center">
           <span id="adminWelcome" class="text-base-content/50 text-sm"></span>
           <button class="btn btn-outline btn-sm" onclick="refreshBookings()">🔄 Refresh</button>
           <button class="btn btn-error btn-sm" onclick="adminLogout()">🚪 Logout</button>
@@ -62,10 +93,10 @@
       </div>
 
       <!-- BOOKINGS SECTION -->
-      <h2 class="text-xl font-bold text-primary mb-4">📅 Bookings</h2>
+      <h2 class="text-lg font-bold text-primary mb-3">📅 Bookings</h2>
 
       <!-- Stats -->
-      <div class="stats stats-horizontal shadow w-full bg-base-100 mb-6 flex-wrap">
+      <div class="stats stats-grid stats-horizontal shadow w-full bg-base-100 mb-6 flex-wrap">
         <div class="stat text-center">
           <div class="stat-value text-primary" id="statTotal">–</div>
           <div class="stat-desc text-base">Total</div>
@@ -86,24 +117,31 @@
 
       <!-- Filter -->
       <div class="flex flex-wrap gap-2 mb-4 items-center">
-        <input type="text" id="searchInput" placeholder="🔍 Search name, email, service..." class="input input-bordered flex-1 min-w-48" oninput="renderTable()" />
-        <button class="btn btn-primary btn-sm filter-btn active" onclick="setFilter('all',this)">All</button>
-        <button class="btn btn-outline btn-sm filter-btn" onclick="setFilter('pending',this)">Pending</button>
-        <button class="btn btn-outline btn-sm filter-btn" onclick="setFilter('confirmed',this)">Confirmed</button>
-        <button class="btn btn-outline btn-sm filter-btn" onclick="setFilter('cancelled',this)">Cancelled</button>
+        <input type="text" id="searchInput" placeholder="🔍 Search name, email, service..." class="input input-bordered w-full mb-2" oninput="renderTable()" />
+        <div class="filter-row flex gap-2 flex-wrap">
+          <button class="btn btn-primary btn-sm filter-btn active" onclick="setFilter('all',this)">All</button>
+          <button class="btn btn-outline btn-sm filter-btn" onclick="setFilter('pending',this)">Pending</button>
+          <button class="btn btn-outline btn-sm filter-btn" onclick="setFilter('confirmed',this)">Confirmed</button>
+          <button class="btn btn-outline btn-sm filter-btn" onclick="setFilter('cancelled',this)">Cancelled</button>
+        </div>
       </div>
 
-      <!-- Bookings Table -->
-      <div class="card bg-base-100 shadow overflow-x-auto mb-10">
+      <!-- Bookings — table on desktop, cards on mobile -->
+      <div class="mb-10">
         <div id="tableLoader" class="flex justify-center py-8"><span class="loading loading-spinner loading-lg text-primary"></span></div>
-        <table class="table table-zebra w-full" id="bookingsTable" style="display:none;">
-          <thead>
-            <tr class="bg-primary text-primary-content">
-              <th>#</th><th>Patient</th><th>Contact</th><th>Service</th><th>Date & Time</th><th>Notes</th><th>Status</th><th>Booked On</th><th>Actions</th>
-            </tr>
-          </thead>
-          <tbody id="bookingsBody"></tbody>
-        </table>
+        <!-- Desktop table -->
+        <div class="admin-table-wrap card bg-base-100 shadow hidden lg:block">
+          <table class="table table-zebra w-full" id="bookingsTable" style="display:none;">
+            <thead>
+              <tr class="bg-primary text-primary-content">
+                <th>#</th><th>Patient</th><th>Contact</th><th>Service</th><th>Date & Time</th><th>Notes</th><th>Status</th><th>Booked On</th><th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="bookingsBody"></tbody>
+          </table>
+        </div>
+        <!-- Mobile cards -->
+        <div id="bookingCards" class="admin-card-list lg:hidden"></div>
         <div id="emptyState" class="text-center py-10 text-base-content/40" style="display:none;">
           <div class="text-4xl mb-2">📭</div><p>No bookings found.</p>
         </div>
@@ -141,7 +179,7 @@
           <div id="videoMsg" class="form-message mt-3"></div>
         </div>
 
-        <div class="card bg-base-100 shadow overflow-x-auto mb-10">
+        <div class="admin-table-wrap card bg-base-100 shadow hidden lg:block mb-4">
           <div id="videoLoader" class="flex justify-center py-8"><span class="loading loading-spinner loading-lg text-primary"></span></div>
           <table class="table table-zebra w-full" id="videosTable" style="display:none;">
             <thead>
@@ -155,6 +193,8 @@
             <div class="text-4xl mb-2">🎥</div><p>No videos added yet.</p>
           </div>
         </div>
+        <!-- Mobile video cards -->
+        <div id="videoCards" class="admin-card-list lg:hidden mb-10"></div>
       </div>
 
       <!-- REVIEW MANAGEMENT -->
@@ -163,7 +203,7 @@
           <h2 class="text-xl font-bold text-primary">⭐ Review Management</h2>
           <button class="btn btn-outline btn-sm" onclick="loadReviewsAdmin()">🔄 Refresh</button>
         </div>
-        <div class="card bg-base-100 shadow overflow-x-auto">
+        <div class="admin-table-wrap card bg-base-100 shadow hidden lg:block">
           <div id="reviewLoader" class="flex justify-center py-8"><span class="loading loading-spinner loading-lg text-primary"></span></div>
           <table class="table table-zebra w-full" id="reviewsTable" style="display:none;">
             <thead>
@@ -177,6 +217,8 @@
             <div class="text-4xl mb-2">⭐</div><p>No reviews yet.</p>
           </div>
         </div>
+        <!-- Mobile review cards -->
+        <div id="reviewCards" class="admin-card-list lg:hidden"></div>
       </div>
 
     </div>
@@ -285,10 +327,17 @@
       const tbody = document.getElementById('bookingsBody');
       const table = document.getElementById('bookingsTable');
       const empty = document.getElementById('emptyState');
-      if (!data.length) { table.style.display = 'none'; empty.style.display = 'block'; return; }
-      table.style.display = 'table'; empty.style.display = 'none';
+      const cards = document.getElementById('bookingCards');
+      if (!data.length) {
+        table.style.display = 'none';
+        if (cards) cards.innerHTML = '';
+        empty.style.display = 'block';
+        return;
+      }
+      empty.style.display = 'none';
       const statusBadge = { pending: 'badge-warning', confirmed: 'badge-success', cancelled: 'badge-error' };
-      tbody.innerHTML = data.map((b, i) => `
+      const statusColor = { pending: '#f59e0b', confirmed: '#22c55e', cancelled: '#ef4444' };
+      const rows = data.map((b, i) => `
         <tr>
           <td class="text-base-content/40 text-xs">${i+1}</td>
           <td><span class="font-semibold">${esc(b.name)}</span></td>
@@ -306,6 +355,31 @@
             </div>
           </td>
         </tr>`).join('');
+      table.style.display = 'table';
+      tbody.innerHTML = rows;
+
+      // Mobile cards
+      if (cards) {
+        cards.innerHTML = data.map((b, i) => `
+          <div class="admin-card-item">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">
+              <span class="font-bold text-base">${esc(b.name)}</span>
+              <span class="badge ${statusBadge[b.status]||'badge-ghost'} badge-sm">${b.status}</span>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.4rem 0.75rem;margin-bottom:0.5rem;">
+              <div><div class="label">Service</div><div class="value">${esc(b.service)}</div></div>
+              <div><div class="label">Date</div><div class="value">${esc(b.date)} ${esc(b.time)}</div></div>
+              <div><div class="label">Phone</div><div class="value">${esc(b.phone)}</div></div>
+              <div><div class="label">Email</div><div class="value" style="font-size:0.78rem;word-break:break-all;">${esc(b.email)}</div></div>
+              ${b.message?`<div style="grid-column:1/-1"><div class="label">Notes</div><div class="value">${esc(b.message)}</div></div>`:''}
+            </div>
+            <div class="actions">
+              ${b.status!=='confirmed'?`<button class="btn btn-success btn-xs" onclick="updateStatus('${b._id}','confirmed')">✓ Confirm</button>`:''}
+              ${b.status!=='cancelled'?`<button class="btn btn-warning btn-xs" onclick="updateStatus('${b._id}','cancelled')">✕ Cancel</button>`:''}
+              <button class="btn btn-error btn-xs" onclick="deleteBooking('${b._id}')">🗑 Delete</button>
+            </div>
+          </div>`).join('');
+      }
     }
 
     async function updateStatus(id, status) {
@@ -338,7 +412,8 @@
         const tbody = document.getElementById('videosBody');
         const table = document.getElementById('videosTable');
         const empty = document.getElementById('videoEmpty');
-        if (!videos.length) { empty.style.display = 'block'; return; }
+        const cards = document.getElementById('videoCards');
+        if (!videos.length) { empty.style.display = 'block'; if(cards) cards.innerHTML=''; return; }
         table.style.display = 'table';
         tbody.innerHTML = videos.map((v, i) => `
           <tr>
@@ -349,6 +424,17 @@
             <td class="text-xs text-base-content/40">${new Date(v.createdAt).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})}</td>
             <td><button class="btn btn-error btn-xs" onclick="deleteVideo('${v._id}')">🗑 Delete</button></td>
           </tr>`).join('');
+        if (cards) {
+          cards.innerHTML = videos.map(v => `
+            <div class="admin-card-item" style="display:flex;gap:0.75rem;align-items:center;">
+              <img src="https://img.youtube.com/vi/${v.youtubeId}/mqdefault.jpg" alt="${esc(v.title)}" style="width:80px;height:45px;object-fit:cover;border-radius:6px;flex-shrink:0;" />
+              <div style="flex:1;min-width:0;">
+                <div class="font-semibold text-sm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${esc(v.title)}</div>
+                <span class="badge badge-primary badge-sm">${CAT_LABELS[v.category]||v.category}</span>
+              </div>
+              <button class="btn btn-error btn-xs" onclick="deleteVideo('${v._id}')">🗑</button>
+            </div>`).join('');
+        }
       } catch { showToast('Failed to load videos', 'error'); }
       finally { document.getElementById('videoLoader').style.display = 'none'; }
     }
@@ -389,7 +475,8 @@
         const tbody = document.getElementById('reviewsBody');
         const table = document.getElementById('reviewsTable');
         const empty = document.getElementById('reviewEmpty');
-        if (!reviews.length) { empty.style.display = 'block'; return; }
+        const cards = document.getElementById('reviewCards');
+        if (!reviews.length) { empty.style.display = 'block'; if(cards) cards.innerHTML=''; return; }
         table.style.display = 'table';
         tbody.innerHTML = reviews.map((r, i) => `
           <tr>
@@ -406,6 +493,22 @@
               </div>
             </td>
           </tr>`).join('');
+        if (cards) {
+          cards.innerHTML = reviews.map(r => `
+            <div class="admin-card-item">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem;">
+                <span class="font-bold">${esc(r.name)}</span>
+                <span class="badge ${r.approved?'badge-success':'badge-warning'} badge-sm">${r.approved?'Approved':'Pending'}</span>
+              </div>
+              <div style="color:#f59e0b;font-size:1rem;margin-bottom:0.3rem;">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div>
+              <div class="value" style="margin-bottom:0.5rem;font-size:0.85rem;color:#4b5563;">"${esc(r.review)}"</div>
+              <div class="label" style="margin-bottom:0.5rem;">${new Date(r.createdAt).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})}</div>
+              <div class="actions">
+                ${!r.approved?`<button class="btn btn-success btn-xs" onclick="approveReview('${r._id}',true)">✓ Approve</button>`:`<button class="btn btn-warning btn-xs" onclick="approveReview('${r._id}',false)">↩ Unapprove</button>`}
+                <button class="btn btn-error btn-xs" onclick="deleteReview('${r._id}')">🗑 Delete</button>
+              </div>
+            </div>`).join('');
+        }
       } catch { showToast('Failed to load reviews', 'error'); }
       finally { document.getElementById('reviewLoader').style.display = 'none'; }
     }
