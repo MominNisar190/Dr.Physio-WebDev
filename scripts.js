@@ -23,6 +23,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
+  // Ripple on button click
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('.btn-book,.btn-primary,.btn-warning,.btn-success,.btn-error,.btn-neutral');
+    if (!btn) return;
+    const r = document.createElement('span');
+    r.className = 'btn-ripple';
+    const rect = btn.getBoundingClientRect();
+    r.style.left = (e.clientX - rect.left - 5) + 'px';
+    r.style.top  = (e.clientY - rect.top  - 5) + 'px';
+    btn.style.overflow = 'hidden';
+    btn.style.position = 'relative';
+    btn.appendChild(r);
+    r.addEventListener('animationend', () => r.remove());
+  });
+
   document.querySelectorAll('[data-target]').forEach(el => {
     const target = parseInt(el.dataset.target, 10);
     const step = target / (1600 / 16);
@@ -195,6 +210,11 @@ document.addEventListener('DOMContentLoaded', function () {
         <strong>— ${r.name}</strong>
         <div class="review-date">${new Date(r.createdAt).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})}</div>
       </div>`).join('')}</div>`;
+    setTimeout(() => {
+      reviewsList.querySelectorAll('.review-card').forEach((card, i) => {
+        setTimeout(() => card.classList.add('rv-visible'), i * 110);
+      });
+    }, 40);
     const moreWrap = document.getElementById('moreReviewsWrap');
     if (moreWrap) moreWrap.style.display = allReviewsData.length > 3 && limit ? 'block' : 'none';
   }

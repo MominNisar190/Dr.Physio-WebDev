@@ -1,0 +1,189 @@
+/* =============================================
+   ANIMATIONS — Complete System
+   ============================================= */
+
+/* ---- Keyframes ---- */
+@keyframes fadeIn        { from{opacity:0} to{opacity:1} }
+@keyframes fadeUp        { from{opacity:0;transform:translateY(36px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeLeft      { from{opacity:0;transform:translateX(40px)} to{opacity:1;transform:translateX(0)} }
+@keyframes scaleIn       { from{opacity:0;transform:scale(0.9)} to{opacity:1;transform:scale(1)} }
+@keyframes slideDown     { from{opacity:0;transform:translateY(-18px)} to{opacity:1;transform:translateY(0)} }
+@keyframes badgeBounce   { 0%{opacity:0;transform:scale(0.6) translateY(8px)} 70%{transform:scale(1.1) translateY(-2px)} 100%{opacity:1;transform:scale(1) translateY(0)} }
+@keyframes floatUpDown   { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
+@keyframes tealPulse     { 0%,100%{box-shadow:0 0 0 0 rgba(46,196,182,0.55)} 50%{box-shadow:0 0 0 7px rgba(46,196,182,0)} }
+@keyframes bluePulse     { 0%,100%{box-shadow:0 4px 22px rgba(58,134,255,0.35)} 50%{box-shadow:0 6px 38px rgba(58,134,255,0.62)} }
+@keyframes coralPulse    { 0%,100%{box-shadow:0 4px 22px rgba(255,107,107,0.35)} 50%{box-shadow:0 6px 38px rgba(255,107,107,0.62)} }
+@keyframes shimmerSlide  { 0%{background-position:-200% center} 100%{background-position:200% center} }
+@keyframes rippleOut     { to{transform:scale(4);opacity:0} }
+@keyframes arcIn         { from{transform:scaleX(0)} to{transform:scaleX(1)} }
+@keyframes countFadeUp   { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+/* ---- Page body fade-in ---- */
+body { animation: fadeIn 0.35s ease both; }
+
+/* ---- Header slide down on load ---- */
+.site-header { animation: slideDown 0.45s cubic-bezier(.4,0,.2,1) both; }
+
+/* ---- Hero: image gallery scales in ---- */
+.hero-gallery { animation: scaleIn 0.75s 0.15s cubic-bezier(.4,0,.2,1) both; }
+
+/* ---- Hero: text stagger ---- */
+.hero-content > div:last-child .inline-flex  { animation: fadeUp 0.6s 0.2s  cubic-bezier(.4,0,.2,1) both; }
+.hero-content > div:last-child h1            { animation: fadeUp 0.65s 0.35s cubic-bezier(.4,0,.2,1) both; }
+.hero-content > div:last-child > p           { animation: fadeUp 0.65s 0.5s  cubic-bezier(.4,0,.2,1) both; }
+.hero-content > div:last-child .flex.gap-3   { animation: fadeUp 0.65s 0.65s cubic-bezier(.4,0,.2,1) both; }
+
+/* ---- Hero badge pop + teal dot pulse ---- */
+.hero-img-badge { animation: badgeBounce 0.55s 1s cubic-bezier(.4,0,.2,1) both; }
+.hero-img-badge .dot { animation: tealPulse 2s 1.5s ease-in-out infinite; }
+
+/* ---- Scroll reveal ---- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s cubic-bezier(.4,0,.2,1), transform 0.6s cubic-bezier(.4,0,.2,1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Stagger cards inside a visible reveal parent */
+.reveal.visible > .card:nth-child(1) { transition-delay: 0s; }
+.reveal.visible > .card:nth-child(2) { transition-delay: 0.07s; }
+.reveal.visible > .card:nth-child(3) { transition-delay: 0.14s; }
+.reveal.visible > .card:nth-child(4) { transition-delay: 0.21s; }
+
+/* ---- Cards: hover lift ---- */
+.card {
+  transition: transform 0.3s cubic-bezier(.4,0,.2,1),
+              box-shadow 0.3s cubic-bezier(.4,0,.2,1) !important;
+}
+.card:hover {
+  transform: translateY(-5px) scale(1.012) !important;
+  box-shadow: 0 14px 36px rgba(0,0,0,0.09) !important;
+}
+.border-l-4.border-primary:hover,
+.border-t-4.border-primary:hover {
+  box-shadow: 0 14px 36px rgba(58,134,255,0.12) !important;
+}
+
+/* ---- Floating icons on process/service cards ---- */
+.card.text-center .text-4xl { animation: floatUpDown 3.5s ease-in-out infinite; }
+.card:nth-child(2) .text-4xl { animation-delay: 0.5s; }
+.card:nth-child(3) .text-4xl { animation-delay: 1s; }
+.card:nth-child(4) .text-4xl { animation-delay: 1.5s; }
+
+/* ---- Gallery dots ---- */
+.gallery-dot { transition: all 0.3s cubic-bezier(.4,0,.2,1) !important; }
+.gallery-dot.active { transform: scaleY(1.25); }
+
+/* ---- CTA banner shimmer ---- */
+.hero.bg-gradient-to-r { position: relative; overflow: hidden; }
+.hero.bg-gradient-to-r::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.07) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmerSlide 3.5s linear infinite;
+  pointer-events: none;
+}
+
+/* ---- Review cards stagger ---- */
+.reviews-grid .review-card {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.45s ease, transform 0.45s ease, box-shadow 0.3s ease !important;
+}
+.reviews-grid .review-card.rv-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- Stat counter fade-up ---- */
+.stat-value { animation: countFadeUp 0.5s ease both; }
+
+/* ---- Nav link: curved arc underline ---- */
+.nav-link {
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  padding: 0.4rem 0.65rem !important;
+  border-radius: 0 !important;
+  white-space: nowrap !important;
+  color: #374151 !important;
+  text-decoration: none !important;
+  display: block !important;
+  position: relative !important;
+  background: transparent !important;
+  transition: color 0.2s ease !important;
+}
+.nav-link:hover  { color: #3A86FF !important; background: transparent !important; }
+.nav-link.active { color: #3A86FF !important; font-weight: 700 !important; background: transparent !important; border-bottom: none !important; }
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 12%; right: 12%;
+  height: 3px;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  background: #3A86FF;
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.25s cubic-bezier(.4,0,.2,1), opacity 0.2s ease;
+}
+.nav-link.active::after { opacity: 1; transform: scaleX(1); }
+.nav-link:hover::after  { opacity: 0.35; transform: scaleX(0.65); }
+
+/* ---- Buttons: base hover lift ---- */
+.btn-primary, .btn-warning, .btn-success, .btn-error, .btn-neutral, .btn-book {
+  transition: transform 0.22s cubic-bezier(.4,0,.2,1),
+              box-shadow 0.22s cubic-bezier(.4,0,.2,1),
+              background 0.22s ease,
+              color 0.15s ease !important;
+}
+.btn-primary:hover  { transform: translateY(-2px) !important; box-shadow: 0 8px 24px rgba(58,134,255,0.42) !important; }
+.btn-warning:hover  { transform: translateY(-2px) !important; box-shadow: 0 8px 24px rgba(245,158,11,0.42) !important; }
+.btn-success:hover  { transform: translateY(-2px) !important; box-shadow: 0 8px 24px rgba(34,197,94,0.42) !important; }
+.btn-error:hover    { transform: translateY(-2px) !important; box-shadow: 0 8px 24px rgba(239,68,68,0.42) !important; }
+.btn-neutral:hover  { transform: translateY(-2px) !important; box-shadow: 0 8px 24px rgba(30,41,59,0.42) !important; }
+
+/* Active: press down, keep color */
+.btn-primary:active { transform: translateY(0) !important; background: linear-gradient(135deg,#1d4ed8,#0e7490) !important; color:#fff !important; filter:none !important; }
+.btn-warning:active { transform: translateY(0) !important; background: linear-gradient(135deg,#b45309,#c2410c) !important; color:#fff !important; filter:none !important; }
+.btn-success:active { transform: translateY(0) !important; background: linear-gradient(135deg,#15803d,#166534) !important; color:#fff !important; filter:none !important; }
+.btn-error:active   { transform: translateY(0) !important; background: linear-gradient(135deg,#b91c1c,#991b1b) !important; color:#fff !important; filter:none !important; }
+.btn-neutral:active { transform: translateY(0) !important; background: linear-gradient(135deg,#0f172a,#1e293b) !important; color:#fff !important; filter:none !important; }
+
+/* Outline primary active */
+.btn-outline.btn-primary:active {
+  background: linear-gradient(135deg,#1d4ed8,#0e7490) !important;
+  border-color: transparent !important;
+  color: #fff !important;
+  filter: none !important;
+}
+
+/* Kill DaisyUI color-mix on active */
+.btn:active { filter: none !important; }
+
+/* ---- btn-book pulse + hover ---- */
+.btn-book:not(.btn-book-coral) { animation: bluePulse 2.5s 1.5s ease-in-out infinite; }
+.btn-book-coral                { animation: coralPulse 2.5s 1.5s ease-in-out infinite; }
+.btn-book:hover, .btn-book-coral:hover { animation: none !important; transform: translateY(-3px) scale(1.03) !important; }
+.btn-book:active { transform: translateY(0) scale(1) !important; background: linear-gradient(135deg,#1d4ed8,#0e7490) !important; color:#fff !important; animation:none !important; }
+.btn-book.btn-book-coral:active { background: linear-gradient(135deg,#b91c1c,#9a1515) !important; color:#fff !important; }
+
+/* ---- Ripple ---- */
+.btn-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.28);
+  width: 10px; height: 10px;
+  transform: scale(0);
+  animation: rippleOut 0.5s linear;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ---- Accessibility ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
+}
