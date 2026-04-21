@@ -102,7 +102,41 @@ html { scroll-behavior: smooth; }
   .hero-gallery { height: 280px; }
 }
 
-/* Navbar always-visible links */
+/* =============================================
+   SITE HEADER (two-row on mobile)
+   ============================================= */
+.site-header {
+  /* desktop: single row ~56px */
+}
+
+/* Mobile second row nav links */
+.site-header .lg\:hidden ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Page content offset — desktop: 56px, mobile: 56px + 36px second row */
+.hero-top-offset {
+  padding-top: 92px;
+}
+@media (min-width: 1024px) {
+  .hero-top-offset {
+    padding-top: 56px;
+  }
+}
+
+/* All other pages use pt-24 on mobile, pt-16 on desktop */
+@media (max-width: 1023px) {
+  main[class*="pt-24"] {
+    padding-top: 100px !important;
+  }
+  main[class*="pt-16"] {
+    padding-top: 100px !important;
+  }
+}
+
+/* Nav link styles */
 .nav-links-scroll {
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -112,10 +146,13 @@ html { scroll-behavior: smooth; }
 .nav-link {
   font-size: 0.82rem !important;
   font-weight: 600 !important;
-  padding: 0.4rem 0.55rem !important;
+  padding: 0.35rem 0.5rem !important;
   border-radius: 8px !important;
   white-space: nowrap !important;
   transition: all 0.2s ease !important;
+  color: #4b5563;
+  text-decoration: none;
+  display: block;
 }
 .nav-link:hover {
   background: rgba(58,134,255,0.08) !important;
@@ -123,8 +160,135 @@ html { scroll-behavior: smooth; }
 }
 .nav-link.active {
   color: #3A86FF !important;
-  background: rgba(58,134,255,0.1) !important;
   font-weight: 700 !important;
+  border-bottom: 2px solid #3A86FF;
+}
+
+/* Mobile second row: evenly spaced, compact */
+@media (max-width: 1023px) {
+  .site-header .lg\:hidden {
+    background: #fff;
+  }
+  .site-header .lg\:hidden ul {
+    display: flex;
+    justify-content: space-around;
+    padding: 4px 8px;
+  }
+  .site-header .lg\:hidden ul li {
+    list-style: none;
+  }
+  .nav-link {
+    font-size: 0.75rem !important;
+    padding: 0.3rem 0.4rem !important;
+  }
+  .navbar-end .btn-sm,
+  .site-header .btn-sm {
+    font-size: 0.78rem !important;
+    padding: 0.38rem 0.8rem !important;
+  }
+}
+
+/* =============================================
+   MOBILE BOTTOM NAVIGATION BAR
+   ============================================= */
+.mobile-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background: #fff;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  align-items: stretch;
+  height: 62px;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+}
+
+.mobile-nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  text-decoration: none;
+  color: #9ca3af;
+  transition: all 0.2s ease;
+  padding: 6px 4px;
+}
+.mobile-nav-item:hover,
+.mobile-nav-item.active {
+  color: #3A86FF;
+}
+.mobile-nav-item.active .mobile-nav-icon {
+  transform: scale(1.15);
+}
+
+.mobile-nav-icon {
+  font-size: 1.3rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+.mobile-nav-label {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* Center "Book" button — elevated pill */
+.mobile-nav-book {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  text-decoration: none;
+  color: #fff;
+  position: relative;
+  padding: 6px 4px;
+}
+.mobile-nav-book .mobile-nav-icon,
+.mobile-nav-book .mobile-nav-label {
+  position: relative;
+  z-index: 1;
+}
+.mobile-nav-book::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3A86FF, #2EC4B6);
+  box-shadow: 0 4px 16px rgba(58,134,255,0.45);
+  transition: all 0.2s ease;
+}
+.mobile-nav-book:hover::before,
+.mobile-nav-book.active::before {
+  background: linear-gradient(135deg, #2563eb, #0891b2);
+  box-shadow: 0 6px 20px rgba(58,134,255,0.6);
+  transform: translateX(-50%) scale(1.08);
+}
+.mobile-nav-book .mobile-nav-label {
+  color: #3A86FF;
+  font-weight: 700;
+  margin-top: 28px;
+  font-size: 0.62rem;
+}
+.mobile-nav-book .mobile-nav-icon {
+  position: absolute;
+  top: -4px;
+  font-size: 1.4rem;
+}
+
+/* Add bottom padding to pages so content isn't hidden behind bottom nav */
+@media (max-width: 1024px) {
+  body { padding-bottom: 70px; }
+  footer { margin-bottom: 0 !important; }
 }
 
 @media (max-width: 768px) {

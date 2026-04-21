@@ -12,26 +12,35 @@
 <body class="bg-base-200 min-h-screen">
 
   <!-- NAVBAR -->
-  <div class="navbar bg-base-100 shadow-md fixed top-0 left-0 right-0 z-50 px-3 nav-mobile">
-    <div class="navbar-start flex-shrink-0">
+  <!-- Desktop: single row | Mobile: two rows (logo+book / links) -->
+  <header class="site-header fixed top-0 left-0 right-0 z-50 bg-base-100 shadow-md">
+    <!-- Row 1: Logo + Book -->
+    <div class="flex items-center justify-between px-4 h-14">
       <a href="index.html" class="text-primary font-bold text-base flex items-center gap-1">🩺 Dr. Zishaan <span class="text-secondary">Shaha</span></a>
+      <!-- Desktop nav links (row 1, center) -->
+      <ul class="hidden lg:flex menu menu-horizontal px-1 gap-0">
+        <li><a href="index.html" class="nav-link font-semibold">Home</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="training-videos.html" class="nav-link">Videos</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+      </ul>
+      <a href="contact.html" class="btn btn-primary btn-sm">📅 Book Now</a>
     </div>
-    <div class="navbar-center flex overflow-x-auto nav-links-scroll">
-      <ul class="menu menu-horizontal px-1 gap-0 flex-nowrap">
-        <li><a href="index.html" class="font-semibold nav-link">Home</a></li>
+    <!-- Row 2: Nav links (mobile only) -->
+    <div class="lg:hidden border-t border-base-200 bg-base-100">
+      <ul class="flex items-center justify-around px-1 py-1">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
         <li><a href="services.html" class="nav-link">Services</a></li>
         <li><a href="blog.html" class="nav-link">Blog</a></li>
         <li><a href="training-videos.html" class="nav-link">Videos</a></li>
         <li><a href="about.html" class="nav-link">About</a></li>
       </ul>
     </div>
-    <div class="navbar-end flex-shrink-0">
-      <a href="contact.html" class="btn btn-primary btn-sm">📅 Book</a>
-    </div>
-  </div>
+  </header>
 
   <!-- HERO -->
-  <div class="hero min-h-[85vh] pt-16" style="background: linear-gradient(135deg, #EBF3FF 0%, #F7F9FC 60%, #E6F9F7 100%);">
+  <div class="hero min-h-[85vh] hero-top-offset" style="background: linear-gradient(135deg, #EBF3FF 0%, #F7F9FC 60%, #E6F9F7 100%);">
     <div class="hero-content flex-col lg:flex-row-reverse gap-10 max-w-6xl w-full px-4 py-16">
       <div class="relative w-full lg:w-1/2">
         <div class="hero-gallery rounded-2xl overflow-hidden shadow-2xl" style="height:420px; position:relative;">
