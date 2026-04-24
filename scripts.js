@@ -63,19 +63,42 @@ document.addEventListener('DOMContentLoaded', function () {
     // Phone number formatting
     const phoneInput = document.getElementById('phone');
     if (phoneInput) {
-      phoneInput.addEventListener('input', function(e) {
-        let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
-        if (value.length > 0 && !value.startsWith('91') && value.length <= 10) {
-          // Auto-add country code for Indian numbers
-          if (value.length === 10) {
-            value = '91' + value;
-          }
+      // Set default value to +91 when field is focused and empty
+      phoneInput.addEventListener('focus', function(e) {
+        if (!e.target.value || e.target.value.trim() === '') {
+          e.target.value = '+91 ';
         }
+      });
+
+      phoneInput.addEventListener('input', function(e) {
+        let value = e.target.value;
+        
+        // Always ensure it starts with +91
+        if (!value.startsWith('+91')) {
+          value = '+91 ' + value.replace(/^\+?91?\s?/, '');
+        }
+        
+        // Remove all non-digits except the leading +91
+        const prefix = '+91 ';
+        const digits = value.substring(3).replace(/\D/g, '');
+        
         // Format: +91 XXXXX XXXXX
-        if (value.length > 2) {
-          e.target.value = '+' + value.substring(0, 2) + ' ' + value.substring(2, 7) + (value.length > 7 ? ' ' + value.substring(7, 12) : '');
-        } else if (value.length > 0) {
-          e.target.value = '+' + value;
+        if (digits.length > 0) {
+          if (digits.length <= 5) {
+            e.target.value = prefix + digits;
+          } else {
+            e.target.value = prefix + digits.substring(0, 5) + ' ' + digits.substring(5, 10);
+          }
+        } else {
+          e.target.value = prefix;
+        }
+      });
+
+      // Prevent user from deleting +91
+      phoneInput.addEventListener('keydown', function(e) {
+        const cursorPosition = e.target.selectionStart;
+        if ((e.key === 'Backspace' || e.key === 'Delete') && cursorPosition <= 4) {
+          e.preventDefault();
         }
       });
     }
@@ -100,16 +123,16 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
-      const phoneRegex = /^[+]?[0-9]{10,15}$/;
-      if (!phoneRegex.test(phone.replace(/[\s\-\(\)]/g, ''))) {
+      // Clean phone and validate
+      const cleanPhone = phone.replace(/[\s\+\-\(\)]/g, '');
+      if (!cleanPhone || cleanPhone.length < 10 || cleanPhone.length > 15) {
         msg.textContent = 'Please enter a valid phone number (10-15 digits).';
         msg.className = 'form-message error';
         msg.style.display = 'block';
         return;
       }
 
-      const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
-      if (!emailRegex.test(email)) {
+      if (!email || !email.includes('@') || !email.includes('.')) {
         msg.textContent = 'Please enter a valid email address.';
         msg.className = 'form-message error';
         msg.style.display = 'block';
@@ -130,13 +153,6 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
-      if (!appointmentForm.checkValidity()) {
-        msg.textContent = 'Please fill out all required fields correctly.';
-        msg.className = 'form-message error';
-        msg.style.display = 'block';
-        return;
-      }
-
       btn.textContent = '⏳ Submitting…';
       btn.disabled = true;
       msg.className = 'form-message';
@@ -145,12 +161,14 @@ document.addEventListener('DOMContentLoaded', function () {
       const payload = {
         name:    name,
         email:   email,
-        phone:   phone,
+        phone:   phone.replace(/[\s\-\(\)]/g, ''), // Clean phone number before sending
         service: service,
         date:    date,
         time:    time,
         message: document.getElementById('message')?.value.trim() || ''
       };
+
+      console.log('Submitting booking:', payload);
 
       try {
         const res = await fetch(`${API_BASE}/bookings`, {
@@ -159,13 +177,17 @@ document.addEventListener('DOMContentLoaded', function () {
           body: JSON.stringify(payload)
         });
         const data = await res.json();
-        if (!res.ok) throw new Error(data.error || 'Submission failed');
+        if (!res.ok) {
+          console.error('Booking error:', data);
+          throw new Error(data.error || data.message || 'Submission failed');
+        }
         msg.textContent = '✅ Appointment booked successfully!';
         msg.className = 'form-message success';
         msg.style.display = 'block';
         appointmentForm.reset();
         showBookingPopup();
       } catch (err) {
+        console.error('Booking submission error:', err);
         msg.textContent = '❌ ' + err.message;
         msg.className = 'form-message error';
         msg.style.display = 'block';

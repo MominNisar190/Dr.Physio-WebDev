@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Booking API</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .test-box {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    button {
+      background: #3A86FF;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #2563eb;
+    }
+    .result {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 5px;
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
+    .success {
+      background: #dcfce7;
+      color: #16a34a;
+    }
+    .error {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧪 Booking API Test</h1>
+  
+  <div class="test-box">
+    <h2>Test 1: Check API Endpoint</h2>
+    <button onclick="testEndpoint()">Test Connection</button>
+    <div id="result1" class="result"></div>
+  </div>
+
+  <div class="test-box">
+    <h2>Test 2: Submit Test Booking</h2>
+    <button onclick="testBooking()">Submit Test Booking</button>
+    <div id="result2" class="result"></div>
+  </div>
+
+  <script>
+    const API_BASE = 'https://dr-physio-webdev.onrender.com/api';
+
+    async function testEndpoint() {
+      const result = document.getElementById('result1');
+      result.textContent = 'Testing connection...';
+      result.className = 'result';
+      
+      try {
+        const res = await fetch(`${API_BASE}/videos`);
+        const data = await res.json();
+        result.textContent = `✅ SUCCESS!\nStatus: ${res.status}\nResponse: ${JSON.stringify(data, null, 2)}`;
+        result.className = 'result success';
+      } catch (err) {
+        result.textContent = `❌ ERROR!\n${err.message}`;
+        result.className = 'result error';
+      }
+    }
+
+    async function testBooking() {
+      const result = document.getElementById('result2');
+      result.textContent = 'Submitting test booking...';
+      result.className = 'result';
+      
+      const testData = {
+        name: 'Test Patient',
+        email: 'test@example.com',
+        phone: '+917620905072',
+        service: 'Manual Therapy',
+        date: '2026-05-01',
+        time: '14:30',
+        message: 'Test booking from test page'
+      };
+
+      console.log('Sending:', testData);
+
+      try {
+        const res = await fetch(`${API_BASE}/bookings`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(testData)
+        });
+        
+        const data = await res.json();
+        console.log('Response:', data);
+        
+        if (!res.ok) {
+          throw new Error(data.error || data.message || `HTTP ${res.status}`);
+        }
+        
+        result.textContent = `✅ SUCCESS!\nStatus: ${res.status}\nBooking ID: ${data.booking?._id || 'N/A'}\nResponse: ${JSON.stringify(data, null, 2)}`;
+        result.className = 'result success';
+      } catch (err) {
+        result.textContent = `❌ ERROR!\n${err.message}\n\nCheck browser console for details.`;
+        result.className = 'result error';
+        console.error('Booking error:', err);
+      }
+    }
+  </script>
+</body>
+</html>
